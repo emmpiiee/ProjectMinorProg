@@ -14,6 +14,7 @@
 		B55688561CFD8A3700030D5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B55688541CFD8A3700030D5C /* LaunchScreen.storyboard */; };
 		B55688611CFD8A3700030D5C /* PacktagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55688601CFD8A3700030D5C /* PacktagTests.swift */; };
 		B556886C1CFD8A3700030D5C /* PacktagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B556886B1CFD8A3700030D5C /* PacktagUITests.swift */; };
+		CF21F11CF0BAEB8D8A2F4184 /* Pods_Packtag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4EABC3D0B52883061E866B /* Pods_Packtag.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A4EABC3D0B52883061E866B /* Pods_Packtag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Packtag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F19B406920AC3675AB1E477 /* Pods-Packtag.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Packtag.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Packtag/Pods-Packtag.debug.xcconfig"; sourceTree = "<group>"; };
+		77B822E95E4D8708C03552ED /* Pods-Packtag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Packtag.release.xcconfig"; path = "Pods/Target Support Files/Pods-Packtag/Pods-Packtag.release.xcconfig"; sourceTree = "<group>"; };
 		B55688481CFD8A3700030D5C /* Packtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Packtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B556884B1CFD8A3700030D5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B556884D1CFD8A3700030D5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF21F11CF0BAEB8D8A2F4184 /* Pods_Packtag.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +79,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6DA4CA6C57B58ACD77F1AC49 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A4EABC3D0B52883061E866B /* Pods_Packtag.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ACEE5FC99EA2087DE4C27A6F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F19B406920AC3675AB1E477 /* Pods-Packtag.debug.xcconfig */,
+				77B822E95E4D8708C03552ED /* Pods-Packtag.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B556883F1CFD8A3700030D5C = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +103,8 @@
 				B556885F1CFD8A3700030D5C /* PacktagTests */,
 				B556886A1CFD8A3700030D5C /* PacktagUITests */,
 				B55688491CFD8A3700030D5C /* Products */,
+				ACEE5FC99EA2087DE4C27A6F /* Pods */,
+				6DA4CA6C57B58ACD77F1AC49 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,9 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B55688701CFD8A3700030D5C /* Build configuration list for PBXNativeTarget "Packtag" */;
 			buildPhases = (
+				53988DE71D0A9AA5D7B4C90B /* 📦 Check Pods Manifest.lock */,
 				B55688441CFD8A3700030D5C /* Sources */,
 				B55688451CFD8A3700030D5C /* Frameworks */,
 				B55688461CFD8A3700030D5C /* Resources */,
+				6DC2B4112692B6BE49086282 /* 📦 Embed Pods Frameworks */,
+				30D829A93A9FA4CF5FF7E6E9 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,6 +277,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		30D829A93A9FA4CF5FF7E6E9 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Packtag/Pods-Packtag-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53988DE71D0A9AA5D7B4C90B /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6DC2B4112692B6BE49086282 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Packtag/Pods-Packtag-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B55688441CFD8A3700030D5C /* Sources */ = {
@@ -399,6 +474,7 @@
 		};
 		B55688711CFD8A3700030D5C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F19B406920AC3675AB1E477 /* Pods-Packtag.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Packtag/Info.plist;
@@ -410,6 +486,7 @@
 		};
 		B55688721CFD8A3700030D5C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77B822E95E4D8708C03552ED /* Pods-Packtag.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Packtag/Info.plist;
@@ -484,6 +561,7 @@
 				B55688721CFD8A3700030D5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B55688731CFD8A3700030D5C /* Build configuration list for PBXNativeTarget "PacktagTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +570,7 @@
 				B55688751CFD8A3700030D5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B55688761CFD8A3700030D5C /* Build configuration list for PBXNativeTarget "PacktagUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +579,7 @@
 				B55688781CFD8A3700030D5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
