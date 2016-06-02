@@ -18,6 +18,9 @@
 		B5B92BB91D00541B0038DCF4 /* doc in Resources */ = {isa = PBXBuildFile; fileRef = B5B92BB51D00541B0038DCF4 /* doc */; };
 		B5B92BBA1D00541B0038DCF4 /* Logboek.md in Sources */ = {isa = PBXBuildFile; fileRef = B5B92BB61D00541B0038DCF4 /* Logboek.md */; };
 		B5B92BBB1D00541B0038DCF4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B5B92BB71D00541B0038DCF4 /* README.md */; };
+		B5B92BBD1D00598C0038DCF4 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B92BBC1D00598C0038DCF4 /* CreateEventViewController.swift */; };
+		B5B92BBF1D00599D0038DCF4 /* JoinEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B92BBE1D00599D0038DCF4 /* JoinEventViewController.swift */; };
+		B5B92BC11D0059E70038DCF4 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B92BC01D0059E70038DCF4 /* WallViewController.swift */; };
 		CF21F11CF0BAEB8D8A2F4184 /* Pods_Packtag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4EABC3D0B52883061E866B /* Pods_Packtag.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +62,9 @@
 		B5B92BB51D00541B0038DCF4 /* doc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = doc; sourceTree = "<group>"; };
 		B5B92BB61D00541B0038DCF4 /* Logboek.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Logboek.md; sourceTree = "<group>"; };
 		B5B92BB71D00541B0038DCF4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B5B92BBC1D00598C0038DCF4 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		B5B92BBE1D00599D0038DCF4 /* JoinEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinEventViewController.swift; sourceTree = "<group>"; };
+		B5B92BC01D0059E70038DCF4 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,11 +139,11 @@
 		B556884A1CFD8A3700030D5C /* Packtag */ = {
 			isa = PBXGroup;
 			children = (
+				B5B92BC21D0059F40038DCF4 /* Controller */,
+				B5B92BC31D0059FC0038DCF4 /* View */,
+				B5B92BC51D005A0A0038DCF4 /* Model */,
 				B556884B1CFD8A3700030D5C /* AppDelegate.swift */,
-				B556884D1CFD8A3700030D5C /* ViewController.swift */,
-				B556884F1CFD8A3700030D5C /* Main.storyboard */,
 				B55688521CFD8A3700030D5C /* Assets.xcassets */,
-				B55688541CFD8A3700030D5C /* LaunchScreen.storyboard */,
 				B55688571CFD8A3700030D5C /* Info.plist */,
 			);
 			path = Packtag;
@@ -159,6 +165,33 @@
 				B556886D1CFD8A3700030D5C /* Info.plist */,
 			);
 			path = PacktagUITests;
+			sourceTree = "<group>";
+		};
+		B5B92BC21D0059F40038DCF4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B556884D1CFD8A3700030D5C /* ViewController.swift */,
+				B5B92BBC1D00598C0038DCF4 /* CreateEventViewController.swift */,
+				B5B92BBE1D00599D0038DCF4 /* JoinEventViewController.swift */,
+				B5B92BC01D0059E70038DCF4 /* WallViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		B5B92BC31D0059FC0038DCF4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B556884F1CFD8A3700030D5C /* Main.storyboard */,
+				B55688541CFD8A3700030D5C /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		B5B92BC51D005A0A0038DCF4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,9 +379,12 @@
 			files = (
 				B5B92BBA1D00541B0038DCF4 /* Logboek.md in Sources */,
 				B556884E1CFD8A3700030D5C /* ViewController.swift in Sources */,
+				B5B92BC11D0059E70038DCF4 /* WallViewController.swift in Sources */,
 				B5B92BBB1D00541B0038DCF4 /* README.md in Sources */,
 				B556884C1CFD8A3700030D5C /* AppDelegate.swift in Sources */,
 				B5B92BB81D00541B0038DCF4 /* Design.md in Sources */,
+				B5B92BBD1D00598C0038DCF4 /* CreateEventViewController.swift in Sources */,
+				B5B92BBF1D00599D0038DCF4 /* JoinEventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
