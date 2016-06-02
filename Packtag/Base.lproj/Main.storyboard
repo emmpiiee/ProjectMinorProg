@@ -162,8 +162,19 @@
                     <view key="view" contentMode="scaleToFill" id="m6C-da-pdz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ieH-91-2NT">
+                                <rect key="frame" x="20" y="20" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ieH-91-2NT" firstAttribute="top" secondItem="5eb-ai-UEh" secondAttribute="bottom" id="L8u-Om-JZZ"/>
+                            <constraint firstItem="ieH-91-2NT" firstAttribute="leading" secondItem="m6C-da-pdz" secondAttribute="leadingMargin" id="zzv-al-Tf7"/>
+                        </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OlT-jn-JxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
