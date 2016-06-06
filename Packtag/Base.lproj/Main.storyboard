@@ -28,6 +28,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udF-jL-Lwm">
                                 <rect key="frame" x="541" y="20" width="39" height="30"/>
                                 <state key="normal" title="NEXT"/>
+                                <connections>
+                                    <segue destination="ox8-uD-3Ma" kind="show" id="HzW-a5-kUr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WT2-kB-mJ5">
                                 <rect key="frame" x="20" y="20" width="32" height="32"/>
@@ -198,7 +201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7v-Uk-RDd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2496" y="176"/>
+            <point key="canvasLocation" x="2490" y="-509"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="597-fh-ROf">
