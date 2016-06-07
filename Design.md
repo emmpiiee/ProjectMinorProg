@@ -1,5 +1,5 @@
 # Design
-## UML
+## UML MVP (no profile)
 A design of module that I've decided to implement:
 ![alt text](https://github.com/emmpiiee/ProjectMinorProg/blob/master/doc/PacktagDiagram.png)
 
