@@ -8,7 +8,7 @@ The detailed flowchart of sketches:
 ![alt text](https://github.com/emmpiiee/ProjectMinorProg/blob/master/doc/image1%20(2).JPG)
 
 ## List API
-- Dropbox API (to make Database)
+- firebase API (to make Database)
 - Camera API (to open camera) 
 - Filmrol API
 - Firebase API
