@@ -14,7 +14,10 @@ Ook MVP aangepast, dus de readme oook aangepast.
 Besloten om in plaats van Dropbox toch de API firebase te gebruiken. Waren problemen met of gebruik eigen account (voordeel : veel opslag, nadeel : risico eigen bestanden openbaar, mischien per ongeluk dingen wissen) of gebruik nieuw account (voordeel : kan niks mis gaan is niet erg als dingen gewist worden tijdens het project, nadeel : weinig opslag ) Firebase maakt gewoon nieuwe databse aan --> handiger.  Readme aangepast. Vervolgens schermen geimplementeerd met handmatige knoppen onderaan scherm. veel heen en weer navigatie tussen schermen, kijken of dit makkelijker kan 
 
 ## Dag 1.5
-
+Code review gehad. Verteld dat dropbox niet meer nodig was, veel ingelezen over firebase. wordt nog wel lastig te implementeren waarschijnlijk. Bedacht dat de structuur van mijn schermen makkelijk zou moeten kunnen
 
 ## Dag 2.1
+Gelezen dat tapbar controller handiger mooier en handiger is dan zelf ingesteld plaatjes. gehele storyboard vervangen, nu veel overzichtelijker. nog een probleem met verschillende devices. Ik zoek eigenlijk een soort view die schaalt per device terwijl de verhoudingen hetzelfde blijven tussen items. Nu maakt het programma bij profile op iphone 6 een goed beeld maar iphone 4 valt alles weg. met julian besproken moet misschien stackviews gebruiken, echter eerst verder aan code werken later pas layout. 
+
 ## Dag 2.2
+beginnen met coderen opzetten van post and profile models en views. 
