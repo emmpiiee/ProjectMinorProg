@@ -15,7 +15,7 @@ Chasing down photos after an event that you organized is a hassle that most of u
 - option to have a profile with information about guests (also a picture that shows guests) (Option)
 
 ### Data
-No external datasets will be used for this app. We'll make our own database for the photos. This we will extract using JSON and Swift.
+No external datasets will be used for this app. We'll make our own database for the photos via firebase. This we will extract using JSON and Swift.
 More information in the sub API
 
 ### Parts App
@@ -27,10 +27,8 @@ Seperate parts of the app can be defined.
 - (optional) You'll need an option to see other the profile and the pictures other guest posted.
 
 ### API
-We need to create our own online database, which can handle the size of a photo. The API of Dropbox will fullfill this whish. 
+We need to create our own online database, which can handle the size of a photo. The API of firebase will fullfill this whish. 
 We need to make it possible to extraxt and push photos to the online database. We wont use the API of instagram because this will require the user to also upload photos on their timeline on instagram. This will not work because maybe some photos you'll want to post on the event app, you'll not want to post on your instagram account. 
-
-Also check out the api of SQLite online it says it is possible for photos as well. 
 Also opening the camera needs aan API.
 
 ### Difficulties
