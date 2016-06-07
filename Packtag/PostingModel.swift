@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Create class Post to store variables for feeds
 class Post{
     let creator:String
     let timestamp:NSDate
@@ -15,6 +16,7 @@ class Post{
     let caption:String?
     static var feed:Array<Post>?
     
+    // initialize Post class
     init(creator:String, image:UIImage?, caption:String?){
         self.creator = creator
         self.image = image
@@ -22,6 +24,8 @@ class Post{
         timestamp = NSDate()
     }
 }
+
+// create class PostCell to change view of postcell
 class PostCell: UITableViewCell {
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!

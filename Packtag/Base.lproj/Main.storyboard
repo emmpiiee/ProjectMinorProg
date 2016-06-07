@@ -35,6 +35,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WT2-kB-mJ5">
                                 <rect key="frame" x="20" y="20" width="32" height="32"/>
                                 <state key="normal" image="CloseIcon"/>
+                                <connections>
+                                    <segue destination="YsT-yE-3cE" kind="show" id="0zM-nE-akQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="deG-lk-Wnc">
                                 <rect key="frame" x="257" y="513" width="87" height="30"/>
@@ -76,7 +79,7 @@
         <!--Username-->
         <scene sceneID="ezy-bg-SHe">
             <objects>
-                <viewController id="75V-m4-4ga" sceneMemberID="viewController">
+                <viewController id="75V-m4-4ga" customClass="ProfileController" customModule="Packtag" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Zg-oc-cCn"/>
                         <viewControllerLayoutGuide type="bottom" id="sC4-h3-MT5"/>
@@ -121,6 +124,9 @@
                                 <color key="backgroundColor" red="0.88504172120418845" green="0.88504172120418845" blue="0.88504172120418845" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <state key="normal" title="Edit profile"/>
+                                <connections>
+                                    <action selector="editProfile:" destination="75V-m4-4ga" eventType="touchUpInside" id="O1s-OS-82Y"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33i-np-MFA">
                                 <rect key="frame" x="303" y="72" width="81" height="22"/>
@@ -186,6 +192,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Username" id="pyI-ma-9bM"/>
+                    <connections>
+                        <outlet property="followersLabel" destination="33i-np-MFA" id="vPs-sh-QfO"/>
+                        <outlet property="followingLabel" destination="FKf-sy-k0k" id="Vyg-NL-Orm"/>
+                        <outlet property="postsLabel" destination="lMD-QN-b3r" id="Phs-ew-mcr"/>
+                        <outlet property="profilePic" destination="fux-td-j0o" id="6PS-DC-e42"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b65-qW-gkX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -210,6 +222,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="← Back"/>
+                                <connections>
+                                    <segue destination="0TC-rQ-1YO" kind="show" id="z1n-4R-NlN"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zug-Im-rFH">
                                 <rect key="frame" x="20" y="58" width="88" height="88"/>
@@ -386,4 +401,7 @@
         <image name="PhotoIcon" width="32" height="32"/>
         <image name="ProfileIcon" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="z1n-4R-NlN"/>
+    </inferredMetricsTieBreakers>
 </document>
