@@ -20,4 +20,8 @@ Code review gehad. Verteld dat dropbox niet meer nodig was, veel ingelezen over 
 Gelezen dat tapbar controller handiger mooier en handiger is dan zelf ingesteld plaatjes. gehele storyboard vervangen, nu veel overzichtelijker. nog een probleem met verschillende devices. Ik zoek eigenlijk een soort view die schaalt per device terwijl de verhoudingen hetzelfde blijven tussen items. Nu maakt het programma bij profile op iphone 6 een goed beeld maar iphone 4 valt alles weg. met julian besproken moet misschien stackviews gebruiken, echter eerst verder aan code werken later pas layout. 
 
 ## Dag 2.2
-beginnen met coderen opzetten van post and profile models en views. 
+beginnen met coderen opzetten van post and profile models en views. Classes aangemaakt om dingen op te slaan van users en van posts. ook een functie gemaakt om nieuwe users aan te maken. UITable view cell aangemaakt om de feeds te laten zien. profile controller begonnen op te zetten. dat was redelijk te doen, echter de feeds controller stuk lastiger. 
+
+## Dag 2.3
+veel gezeur gehad met nog een header table view cell erbij te maken. dit omdat xcode steeds dacht dat ze dezelfde identifier hadden terwijl dit niet het geval was. xcode moeten afsluiten en weer opstarten om fout weg te krijgen. maken van de feeds controller leverde veel gezeur op. je wilt dat de feeds in omgekeerde volgorde getoont worden, dan ze worden geupload. uiteindelijk denk ik juiste formule alleen kan het niet checken. heb wel een hardcode in de delegate gezet om  te checken of de table view werkt. die werkt wel. ben in twijfel of ik nt als echte instagram een pop-up screen wilt als je op camera klikt of dat dat niet nodig is. 
+probeer eerst zonder.
