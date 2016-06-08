@@ -347,7 +347,7 @@
                                     <outlet property="imgView" destination="bPG-bb-NhE" id="h8e-4X-t3F"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PostCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostHeaderCell" rowHeight="48" id="Y4S-K6-b2H" customClass="PostCell" customModule="Packtag" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PostHeaderCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostHeaderCell" rowHeight="48" id="Y4S-K6-b2H" customClass="PostHeaderCell" customModule="Packtag" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="300" width="600" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y4S-K6-b2H" id="B7f-tC-N9J">
@@ -377,6 +377,10 @@
                                         <constraint firstItem="8EI-j2-Yht" firstAttribute="centerY" secondItem="B7f-tC-N9J" secondAttribute="centerY" id="abE-uj-ff4"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="profilePicture" destination="rVY-Pv-3Gd" id="wWh-oU-BVZ"/>
+                                    <outlet property="usernameButton" destination="8EI-j2-Yht" id="GGC-yA-CLY"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
