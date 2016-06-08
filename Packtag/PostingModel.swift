@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 // Create class Post to store variables for feeds
 class Post{
@@ -29,4 +30,8 @@ class Post{
 class PostCell: UITableViewCell {
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
+}
+
+class PostHeaderCell: UITableViewCell {
+    @IBOutlet weak var 
 }

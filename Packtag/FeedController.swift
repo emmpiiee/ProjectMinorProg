@@ -10,6 +10,11 @@ import UIKit
 
 class FeedController: UITableViewController {
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     // every section needs only 1 row for only 1 post
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -38,4 +43,13 @@ class FeedController: UITableViewController {
         
         return cell
         }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let post = Post.feed![postIndex(indexPath.section)]
+        if let img = post.image {
+            let aspectRatio = img.size.height / img.size.height
+            return tableView.frame.size.width * aspectRatio + 80
+        }
+        return 208
+    }
 }
