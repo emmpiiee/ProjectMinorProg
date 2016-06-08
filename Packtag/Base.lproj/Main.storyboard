@@ -7,10 +7,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Camera Controller-->
         <scene sceneID="93h-yK-nZg">
             <objects>
-                <viewController id="0TC-rQ-1YO" sceneMemberID="viewController">
+                <viewController id="0TC-rQ-1YO" customClass="CameraController" customModule="Packtag" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pzJ-PQ-9JO"/>
                         <viewControllerLayoutGuide type="bottom" id="SQc-F6-z4N"/>
@@ -42,10 +42,16 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="deG-lk-Wnc">
                                 <rect key="frame" x="257" y="513" width="87" height="30"/>
                                 <state key="normal" title="Select photo"/>
+                                <connections>
+                                    <action selector="selectPhoto:" destination="0TC-rQ-1YO" eventType="touchUpInside" id="2kX-Sc-q8L"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JB9-RJ-JFc">
                                 <rect key="frame" x="262" y="475" width="77" height="30"/>
                                 <state key="normal" title="Take photo"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="0TC-rQ-1YO" eventType="touchUpInside" id="zeo-zI-Oc7"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p4N-oC-PQS">
                                 <rect key="frame" x="0.0" y="60" width="600" height="407"/>
@@ -71,6 +77,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="PhotoIcon" id="xca-qB-fZF"/>
+                    <connections>
+                        <outlet property="selectedImageView" destination="p4N-oC-PQS" id="M0i-RV-0OW"/>
+                        <outlet property="sourceLabel" destination="fDD-ob-YYG" id="ode-aZ-kxN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w9e-Kr-8kM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
