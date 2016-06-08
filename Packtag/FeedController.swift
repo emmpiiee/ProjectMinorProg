@@ -33,5 +33,9 @@ class FeedController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let post = Post.feed![postIndex(indexPath.section)]
         let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! PostCell
+        cell.captionLabel.text = post.caption
+        cell.imgView.image = post.image
+        
+        return cell
         }
 }
