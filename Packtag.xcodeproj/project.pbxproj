@@ -21,6 +21,7 @@
 		B5B92BB91D00541B0038DCF4 /* doc in Resources */ = {isa = PBXBuildFile; fileRef = B5B92BB51D00541B0038DCF4 /* doc */; };
 		B5B92BBA1D00541B0038DCF4 /* Logboek.md in Sources */ = {isa = PBXBuildFile; fileRef = B5B92BB61D00541B0038DCF4 /* Logboek.md */; };
 		B5B92BBB1D00541B0038DCF4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B5B92BB71D00541B0038DCF4 /* README.md */; };
+		B5FF399A1D0718CD00025A4C /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF39991D0718CD00025A4C /* FeedController.swift */; };
 		CF21F11CF0BAEB8D8A2F4184 /* Pods_Packtag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4EABC3D0B52883061E866B /* Pods_Packtag.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		B5B92BB51D00541B0038DCF4 /* doc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = doc; sourceTree = "<group>"; };
 		B5B92BB61D00541B0038DCF4 /* Logboek.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Logboek.md; sourceTree = "<group>"; };
 		B5B92BB71D00541B0038DCF4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B5FF39991D0718CD00025A4C /* FeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			children = (
 				B556884D1CFD8A3700030D5C /* ViewController.swift */,
 				B579BDB91D06F19000298E50 /* ProfileController.swift */,
+				B5FF39991D0718CD00025A4C /* FeedController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				B579BDB81D06E7AD00298E50 /* ProfileModel.swift in Sources */,
 				B556884C1CFD8A3700030D5C /* AppDelegate.swift in Sources */,
 				B5B92BB81D00541B0038DCF4 /* Design.md in Sources */,
+				B5FF399A1D0718CD00025A4C /* FeedController.swift in Sources */,
 				B579BDBA1D06F19000298E50 /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
