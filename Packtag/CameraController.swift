@@ -16,6 +16,12 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         sourceLabel.text = "No image selected"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CameraController.clearImage), name: "clearImage", object: nil)
+    }
+    
+    func clearImage () {
+        print("clearImage entered")
+        selectedImageView.image = nil
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {

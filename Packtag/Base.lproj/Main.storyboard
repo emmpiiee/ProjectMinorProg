@@ -273,6 +273,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="wtl-PU-N0w" firstAttribute="top" secondItem="i2F-IF-rX9" secondAttribute="top" id="1My-QB-AtZ"/>
                             <constraint firstItem="aTj-cZ-ZW4" firstAttribute="bottom" secondItem="uWE-ar-x3T" secondAttribute="top" id="44T-qo-qKV"/>
@@ -295,6 +296,9 @@
                                 <exclude reference="uUd-Cb-T2n"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="GBE-TC-suw" appends="YES" id="daB-J2-0B2"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="captionText" destination="R3g-tH-oTS" id="Yqe-wI-YEv"/>
@@ -302,6 +306,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7v-Uk-RDd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="GBE-TC-suw">
+                    <connections>
+                        <action selector="tap:" destination="ox8-uD-3Ma" id="SUU-qX-5xW"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3028" y="171"/>
         </scene>
