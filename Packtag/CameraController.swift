@@ -38,4 +38,11 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
         picker.delegate = self
         self.presentViewController(picker, animated: true, completion: nil)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "selectPhoto"){
+            let destinationVC = segue.destinationViewController as! CaptionController
+            destinationVC.selectedImage = selectedImage
+        }
+    }
 }
