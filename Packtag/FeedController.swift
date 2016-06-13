@@ -43,34 +43,41 @@ class FeedController: UITableViewController {
                 print(error!)
                 }
         }
+            
         // download a file
-        let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
-            let fileManager = NSFileManager.defaultManager()
-            let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-            // generate a unique name for this file in case we've seen it before
-            let UUID = NSUUID().UUIDString
-            let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
-            return directoryURL.URLByAppendingPathComponent(pathComponent)
-        }
-        client.files.download(path: "/2015-07-14 13.16.30 kopie.jpg", destination: destination).response { response, error in
-            if let (metadata, url) = response {
-                print("*** Download file ***")
-                let data = NSData(contentsOfURL: url)
-                let picture = UIImage (data: data!)
-                print("Downloaded file name: \(metadata.name)")
-                print("Downloaded file url: \(url)")
-                fileImages?.append(picture!)
-                let newPost = Post.init(creator: "joe", image: picture!, caption: "test")
-                Post.feed!.append(newPost)
-            } else {
-                print(error!)
+            if filenames == nil {
+                print("filenames is nil")
+            
             }
-        }
-        
+            for filename in filenames! {
+            let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+                let fileManager = NSFileManager.defaultManager()
+                let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                // generate a unique name for this file in case we've seen it before
+                let UUID = NSUUID().UUIDString
+                let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+                return directoryURL.URLByAppendingPathComponent(pathComponent)
+            }
+            client.files.download(path: "/\(filename)", destination: destination).response { response, error in
+                if let (metadata, url) = response {
+                    print("*** Download file ***")
+                    let data = NSData(contentsOfURL: url)
+                    let picture = UIImage (data: data!)
+                    print("Downloaded file name: \(metadata.name)")
+                    print("Downloaded file url: \(url)")
+                    fileImages?.append(picture!)
+                    let newPost = Post.init(creator: "joe", image: picture!, caption: "test")
+                    Post.feed!.append(newPost)
+                } else {
+                    print(error!)
+                }
+            }
+            }
         } else {
             print("error")
-            }
+        }
     }
+    
     // every section needs only 1 row for only 1 post
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
