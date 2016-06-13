@@ -45,6 +45,10 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
+    @IBAction func stopCamera(sender: UIButton!){
+        NSNotificationCenter.defaultCenter().postNotificationName("reloadTable", object: nil)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "selectPhoto"){
             let destinationVC = segue.destinationViewController as! CaptionController

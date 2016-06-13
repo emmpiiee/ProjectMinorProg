@@ -18,6 +18,7 @@ class CaptionController: UIViewController {
         Profile.currentUser!.posts.append(newPost)
         
         NSNotificationCenter.defaultCenter().postNotificationName("clearImage", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("reloadTable", object: nil)
         
         let tabBarController = self.presentingViewController as? UITabBarController
         tabBarController!.selectedIndex = 0

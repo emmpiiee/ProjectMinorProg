@@ -14,6 +14,7 @@ class FeedController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FeedController.reloadTable), name: "reloadTable", object: nil)
     }
     
     // every section needs only 1 row for only 1 post
@@ -31,6 +32,11 @@ class FeedController: UITableViewController {
         else {
             return 0
         }
+    }
+    
+    func reloadTable (){
+        print("reloads table")
+        tableView.reloadData()
     }
     
     // make sure latest post is first
