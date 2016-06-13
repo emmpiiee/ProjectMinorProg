@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyDropbox
 
 class FeedController: UITableViewController {
     
@@ -15,14 +16,65 @@ class FeedController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FeedController.reloadTable), name: "reloadTable", object: nil)
+        
+        var filenames: Array<String>?
+        var fileImages: Array<UIImage>?
+        if let client = Dropbox.authorizedClient {
+        print(client)
+            
+        client.users.getCurrentAccount().response { response, error in
+                print("*** Get current account ***")
+                if let account = response {
+                    print("Hello \(account.name.givenName)!")
+                } else {
+                    print(error!)
+                }
+        }
+        // List folder
+        client.files.listFolder(path: "").response { response, error in
+            print("*** List folder ***")
+            if let result = response {
+                print("Folder contents:")
+                for entry in result.entries {
+                    print(entry.name)
+                    filenames?.append(entry.name)
+                    }
+            } else {
+                print(error!)
+                }
+        }
+        // download a file
+        let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+            let fileManager = NSFileManager.defaultManager()
+            let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+            // generate a unique name for this file in case we've seen it before
+            let UUID = NSUUID().UUIDString
+            let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+            return directoryURL.URLByAppendingPathComponent(pathComponent)
+        }
+        client.files.download(path: "/2015-07-14 13.16.30 kopie.jpg", destination: destination).response { response, error in
+            if let (metadata, url) = response {
+                print("*** Download file ***")
+                let data = NSData(contentsOfURL: url)
+                let picture = UIImage (data: data!)
+                print("Downloaded file name: \(metadata.name)")
+                print("Downloaded file url: \(url)")
+                fileImages?.append(picture!)
+                let newPost = Post.init(creator: "joe", image: picture!, caption: "test")
+                Post.feed!.append(newPost)
+            } else {
+                print(error!)
+            }
+        }
+        
+        } else {
+            print("error")
+            }
     }
-    
     // every section needs only 1 row for only 1 post
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
-    
     
     // every post needs to be in a different section so return number of posts
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -34,6 +86,7 @@ class FeedController: UITableViewController {
         }
     }
     
+    // relaod table
     func reloadTable (){
         print("reloads table")
         tableView.reloadData()

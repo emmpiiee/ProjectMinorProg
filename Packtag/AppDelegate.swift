@@ -13,8 +13,7 @@ import SwiftyDropbox
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let testUser = Profile.createUser("Mark")
         Profile.currentUser = testUser
@@ -24,7 +23,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Post.feed?.append(Post(creator: "steve", image: nil, caption: "this is a test"))
         // Override point for customization after application launch.
         print("klaar")
+        Dropbox.setupWithAppKey("wws46zauqc6bhyt")
         return true
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        if let authResult = Dropbox.handleRedirectURL(url) {
+            switch authResult {
+            case .Success(let token):
+                print("Success! User is logged into Dropbox with token: \(token)")
+            case .Error(let error, let description):
+                print("Error \(error): \(description)")
+            }
+        }
+        
+        return false
     }
 
     func applicationWillResignActive(application: UIApplication) {
