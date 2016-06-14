@@ -25,3 +25,16 @@ beginnen met coderen opzetten van post and profile models en views. Classes aang
 ## Dag 2.3
 veel gezeur gehad met nog een header table view cell erbij te maken. dit omdat xcode steeds dacht dat ze dezelfde identifier hadden terwijl dit niet het geval was. xcode moeten afsluiten en weer opstarten om fout weg te krijgen. maken van de feeds controller leverde veel gezeur op. je wilt dat de feeds in omgekeerde volgorde getoont worden, dan ze worden geupload. uiteindelijk denk ik juiste formule alleen kan het niet checken. heb wel een hardcode in de delegate gezet om  te checken of de table view werkt. die werkt wel. ben in twijfel of ik nt als echte instagram een pop-up screen wilt als je op camera klikt of dat dat niet nodig is. 
 probeer eerst zonder.
+
+## Dag 2.4
+Goede dag gehad. Camera werkende en geeft alles door aan volgende view. posts worden ook opgeslagen met de juiste caption en de juitse gebruiker en de juiste foto. layout veranderd wel als je op kruisje drukt na het kiezen vane een foto --> probleem voor laatste week. de wall werkt nu helemaal behalve dat je niet kan liken en commenten --> zit niet in mvp dus zorg voor later
+
+## Dag 2.5 
+presentatie, besproken of ik met weddingid moet werken of het prive te maken. eerst mvp dus met weddingid. bedacht dat er nu wel echt schot achter de zaak moet gaan komen. 
+
+## Dag 3.1 
+Firebase proberen te implementeren. Veel verschillende documentatie want is net vernieuwd. weer terug gegaan naar dropbpox, want in hour of code veel mensen gehoord die niet uit firebase kwamen en er al dagen mee bezig waren. dropbox heeft een relatief simpele API. Proberen te implementeren. kan nu 1 foto laten zien uit dropbox echter als ik ze alemaal probeer te laten zien kan hij een optional niet uitpakken.
+
+## Dag 3.2 
+
+
