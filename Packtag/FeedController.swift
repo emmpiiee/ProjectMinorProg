@@ -11,6 +11,9 @@ import SwiftyDropbox
 
 class FeedController: UITableViewController {
     
+    var checker = true
+    var cursor1 = String()
+    
     // reload data if home is clicked
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -19,6 +22,7 @@ class FeedController: UITableViewController {
         
         var filenames: Array<String>? = []
         var fileImages: Array<UIImage>?
+        
         if let client = Dropbox.authorizedClient {
             print(client)
             
@@ -31,8 +35,11 @@ class FeedController: UITableViewController {
                 }
             }
             // List folder
+            if checker {
+                checker = false
             client.files.listFolder(path: "").response { response, error in
                 print("*** List folder ***")
+                print("-----------------------------------\(response?.cursor)")
                 if let result = response {
                     print("Folder contents:")
                     for entry in result.entries {
@@ -65,11 +72,59 @@ class FeedController: UITableViewController {
                             } else {
                                 print(error!)
                             }
-                        self.reloadTable()
+                            self.reloadTable()
                         }
+                        self.cursor1 = result.cursor
                     }
                 } else {
                     print(error!)
+                }
+            }
+            }
+            // if for statement 1 time executed
+            else {
+                print("fase 1")
+                print("this is cursor 1 \(self.cursor1)")
+                client.files.listFolderContinue(cursor: self.cursor1).response { response, error in
+                    print("*** List folder ***")
+                    if let result = response {
+                        print("Folder contents:")
+                        for entry in result.entries {
+                            print(entry.name)
+                            filenames?.append(entry.name)
+                            print("dit is de array filenames \(filenames)")
+                            // download a file
+                            let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+                                let fileManager = NSFileManager.defaultManager()
+                                let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                                // generate a unique name for this file in case we've seen it before
+                                let UUID = NSUUID().UUIDString
+                                let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+                                return directoryURL.URLByAppendingPathComponent(pathComponent)
+                            }
+                            client.files.download(path: "/\(entry.name)", destination: destination).response { response, error in
+                                if let (metadata, url) = response {
+                                    print("*** Download file ***")
+                                    let data = NSData(contentsOfURL: url)
+                                    let picture = UIImage (data: data!)
+                                    print("Downloaded file name: \(metadata.name)")
+                                    print("Downloaded file url: \(url)")
+                                    fileImages?.append(picture!)
+                                    // get caption and creator out name
+                                    let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
+                                    let creator = subString[0]
+                                    let caption = subString[1]
+                                    let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)")
+                                    Post.feed!.append(newPost)
+                                } else {
+                                    print(error!)
+                                }
+                                self.reloadTable()
+                            }
+                        }
+                    } else {
+                        print(error!)
+                    }
                 }
             }
         } else {
