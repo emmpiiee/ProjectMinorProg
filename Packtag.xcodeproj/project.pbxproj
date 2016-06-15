@@ -23,6 +23,7 @@
 		B5B92BBB1D00541B0038DCF4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B5B92BB71D00541B0038DCF4 /* README.md */; };
 		B5F6AD6C1D09801B00DA4549 /* CaptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F6AD6B1D09801B00DA4549 /* CaptionController.swift */; };
 		B5F8A6871D0857D6007AD692 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8A6861D0857D6007AD692 /* CameraController.swift */; };
+		B5F9F5001D1032CD005C9CB0 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9F4FF1D1032CD005C9CB0 /* TodoManager.swift */; };
 		B5FF399A1D0718CD00025A4C /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF39991D0718CD00025A4C /* FeedController.swift */; };
 		CF21F11CF0BAEB8D8A2F4184 /* Pods_Packtag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4EABC3D0B52883061E866B /* Pods_Packtag.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,7 @@
 		B5B92BB71D00541B0038DCF4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B5F6AD6B1D09801B00DA4549 /* CaptionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptionController.swift; sourceTree = "<group>"; };
 		B5F8A6861D0857D6007AD692 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		B5F9F4FF1D1032CD005C9CB0 /* TodoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		B5FF39991D0718CD00025A4C /* FeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +205,7 @@
 			children = (
 				B579BDB51D06DFA300298E50 /* PostingModel.swift */,
 				B579BDB71D06E7AD00298E50 /* ProfileModel.swift */,
+				B5F9F4FF1D1032CD005C9CB0 /* TodoManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F8A6871D0857D6007AD692 /* CameraController.swift in Sources */,
+				B5F9F5001D1032CD005C9CB0 /* TodoManager.swift in Sources */,
 				B5B92BBA1D00541B0038DCF4 /* Logboek.md in Sources */,
 				B5F6AD6C1D09801B00DA4549 /* CaptionController.swift in Sources */,
 				B579BDB61D06DFA300298E50 /* PostingModel.swift in Sources */,

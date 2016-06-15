@@ -10,6 +10,10 @@ import UIKit
 import SwiftyDropbox
 
 class LoginScreenController: UIViewController {
+
+    @IBOutlet weak var nameUser: UITextField!
+    @IBOutlet weak var eventId: UITextField!
+    
     @IBAction func linkButtonPressed(sender: AnyObject) {
         if (Dropbox.authorizedClient == nil) {
             Dropbox.authorizeFromController(self)
@@ -17,6 +21,7 @@ class LoginScreenController: UIViewController {
             print("User is already authorized!")
             print(Dropbox.authorizedClient!)
         }
+        TodoManager.sharedInstance.userName = nameUser.text!
     }
     
     override func viewDidLoad() {
