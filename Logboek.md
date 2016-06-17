@@ -36,5 +36,15 @@ presentatie, besproken of ik met weddingid moet werken of het prive te maken. ee
 Firebase proberen te implementeren. Veel verschillende documentatie want is net vernieuwd. weer terug gegaan naar dropbpox, want in hour of code veel mensen gehoord die niet uit firebase kwamen en er al dagen mee bezig waren. dropbox heeft een relatief simpele API. Proberen te implementeren. kan nu 1 foto laten zien uit dropbox echter als ik ze alemaal probeer te laten zien kan hij een optional niet uitpakken.
 
 ## Dag 3.2 
+optional kan nu wel worden uitgepakt. opletten als er bestanden in staan met een ander type dan jpg of een verkeerde naam crasht de app nog. dit mag niet het geval zijn.. week 4 fiksen. er is nu nog een probleem met dingen uploaden. kan nu enkel textbestanden uploaden terwijl ik een foto moet uploaden --> misschien hour of code vragen of andere ook dit probleem hebben
 
+## Dag 3.3
+in hour of code gevraagd of mensen misscien mij konden helpen. goed geholpen goede documentatie gevonden.
+kan nu per ingelogde user in verschillende mappen foto;s laten zien en uploaden. heel lang met jaap aan een syntax probleem van dropbox gezeten uiteindelijk opgelost. probeer nu verschillende evenementen aan te maken maar ben het nog niet helemaal eens met de structuur.
 
+## Dag 3.4
+Nu verschillende evenementen proberen te implementeren maar structuur is lastig . gevraagd aan de hour of code en overwegingen user te hardcoden biedt een oplossing. 
+Loop tegen groot probleem aan. 2 users moeten worden ingelogd want ik wil via het packtag account met de user een gedeelde map maken zodat er ook direct een dropbox map op je computer staat zodat je geen foto's van het gehele event nog moet navragen aan iedereen. er moet dus 1 user (de pactagapp user) worden gehardcoded in het programma. De addMember van Dropbox is depreciated en ze geven geen alternatief dus het linken van de 2 users lukt niet. durf niet te committen want bang dat ik werkende code verlies. 
+
+## DAg 3.5 
+eerst functionaliteit regelen --> bugs komt later. 
