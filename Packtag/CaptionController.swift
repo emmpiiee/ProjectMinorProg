@@ -16,9 +16,6 @@ class CaptionController: UIViewController {
     var selectedImage: UIImage!
     
     @IBAction func submitPressed (sender: UIButton){
-        let newPost = Post.init(creator: Profile.currentUser!.username, image: selectedImage, caption: captionText.text)
-        Post.feed!.append(newPost)
-        Profile.currentUser!.posts.append(newPost)
 
         //
 //    func textViewDidChange(captionText: UITextView){
@@ -28,7 +25,7 @@ class CaptionController: UIViewController {
                     UIImage(data:imageData,scale:1.0)
         
                     if let client = Dropbox.authorizedClient {
-                    client.files.upload(path: "/\(TodoManager.sharedInstance.userName)`\(captionText.text)`likes`version`.jpg", body: imageData).response { response, error in
+                    client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userName)`\(captionText.text)`likes`version`.jpg", body: imageData).response { response, error in
                         if let metadata = response {
                             print("*** Upload file ****")
                             print("Uploaded file name: \(metadata.name)")
