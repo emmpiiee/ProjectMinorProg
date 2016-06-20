@@ -11,6 +11,7 @@ import UIKit
 class ProfileController: UIViewController {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var postsLabel: UILabel!
+    @IBOutlet weak var editProfile: UIButton!
     @IBAction func editProfile(sender: AnyObject){
         print("users want to edit profile")
     }
@@ -20,6 +21,12 @@ class ProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (TodoManager.sharedInstance.userId == TodoManager.sharedInstance.profileViewId){
+            
+        }
+        else {
+            editProfile.hidden = true
+        }
         if let currentUser = Profile.currentUser {
             self.postsLabel.text = "\(currentUser.posts.count)"
             if let profPic = currentUser.picture {

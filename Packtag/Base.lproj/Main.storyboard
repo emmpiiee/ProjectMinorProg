@@ -129,6 +129,7 @@
                                 <state key="normal" title="Edit profile"/>
                                 <connections>
                                     <action selector="editProfile:" destination="75V-m4-4ga" eventType="touchUpInside" id="O1s-OS-82Y"/>
+                                    <segue destination="qLb-50-esS" kind="show" id="zzR-iA-Wbf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -153,6 +154,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Username" id="pyI-ma-9bM"/>
                     <connections>
+                        <outlet property="editProfile" destination="tAg-Kb-W2e" id="LlD-gl-lFn"/>
                         <outlet property="postsLabel" destination="lMD-QN-b3r" id="Phs-ew-mcr"/>
                         <outlet property="profilePic" destination="fux-td-j0o" id="6PS-DC-e42"/>
                     </connections>
@@ -160,6 +162,73 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b65-qW-gkX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1380" y="-305"/>
+        </scene>
+        <!--Edit Profile Controller-->
+        <scene sceneID="Wwr-H7-471">
+            <objects>
+                <viewController id="qLb-50-esS" customClass="EditProfileController" customModule="Packtag" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tka-UV-vzY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Z1e-VL-huz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1wn-kE-QBU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60I-aO-CnE">
+                                <rect key="frame" x="20" y="110" width="77" height="30"/>
+                                <state key="normal" title="Take photo"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="qLb-50-esS" eventType="touchUpInside" id="a9Y-BH-AOH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGA-pY-GJA">
+                                <rect key="frame" x="20" y="72" width="87" height="30"/>
+                                <state key="normal" title="Select photo"/>
+                                <connections>
+                                    <action selector="selectPhoto:" destination="qLb-50-esS" eventType="touchUpInside" id="wo5-o0-bfH"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3rr-vF-eWm">
+                                <rect key="frame" x="115" y="72" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="ubH-iN-eiy"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1OV-9t-XHD">
+                                <rect key="frame" x="20" y="20" width="32" height="32"/>
+                                <state key="normal" image="CloseIcon"/>
+                                <connections>
+                                    <action selector="stopCamera:" destination="0TC-rQ-1YO" eventType="touchUpInside" id="k4z-Ev-HK0"/>
+                                    <action selector="stopCamera:" destination="qLb-50-esS" eventType="touchUpInside" id="vuX-tR-6cd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e0-xD-H1Y">
+                                <rect key="frame" x="191" y="208" width="88" height="30"/>
+                                <state key="normal" title="Select Photo"/>
+                                <connections>
+                                    <action selector="chooseProfile:" destination="qLb-50-esS" eventType="touchUpInside" id="6mB-PX-6tw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oGA-pY-GJA" firstAttribute="top" secondItem="3rr-vF-eWm" secondAttribute="top" id="JEf-dg-HHO"/>
+                            <constraint firstItem="60I-aO-CnE" firstAttribute="top" secondItem="oGA-pY-GJA" secondAttribute="bottom" constant="8" symbolic="YES" id="PJ6-vx-rdf"/>
+                            <constraint firstItem="Z1e-VL-huz" firstAttribute="top" secondItem="3rr-vF-eWm" secondAttribute="bottom" constant="351" id="YAn-oL-uSp"/>
+                            <constraint firstItem="oGA-pY-GJA" firstAttribute="leading" secondItem="1wn-kE-QBU" secondAttribute="leadingMargin" id="hIs-lj-PnV"/>
+                            <constraint firstItem="3rr-vF-eWm" firstAttribute="leading" secondItem="oGA-pY-GJA" secondAttribute="trailing" constant="8" symbolic="YES" id="mPP-ae-U9D"/>
+                            <constraint firstItem="oGA-pY-GJA" firstAttribute="top" secondItem="Tka-UV-vzY" secondAttribute="bottom" constant="8" symbolic="YES" id="oJ0-Yv-w4e"/>
+                            <constraint firstItem="oGA-pY-GJA" firstAttribute="leading" secondItem="60I-aO-CnE" secondAttribute="leading" id="zvV-96-mR3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="selectedImageView" destination="3rr-vF-eWm" id="DH3-wd-QBn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UMK-F8-wRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2013" y="-300"/>
         </scene>
         <!--Caption Controller-->
         <scene sceneID="hiv-Uf-e4I">
@@ -304,6 +373,7 @@
                                             <rect key="frame" x="46" y="8" width="71" height="31"/>
                                             <state key="normal" title="Username"/>
                                             <connections>
+                                                <action selector="showUsersProfile:" destination="Y4S-K6-b2H" eventType="touchUpInside" id="hPS-zM-xLk"/>
                                                 <action selector="showUsersProfile:" destination="Stq-ID-CKv" eventType="touchUpInside" id="wHx-RZ-Ow1"/>
                                             </connections>
                                         </button>
@@ -567,6 +637,6 @@
         <image name="ProfileIcon" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tus-Aj-ifY"/>
+        <segue reference="0zM-nE-akQ"/>
     </inferredMetricsTieBreakers>
 </document>

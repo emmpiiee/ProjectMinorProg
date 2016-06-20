@@ -129,8 +129,8 @@ class FeedController: UITableViewController {
                                         let creator = subString[0]
                                         let caption = subString[1]
                                         let id = subString[2]
-                                        TodoManager.sharedInstance.userId = subString[2]
-                                        let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)", id: "\(TodoManager.sharedInstance.userId)")
+//                                        TodoManager.sharedInstance.userId = subString[2]
+                                        let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)", id: "\(id)")
                                         Post.feed!.append(newPost)
                                     }
                                 } else {
@@ -194,6 +194,8 @@ class FeedController: UITableViewController {
             // set to creators image
         }
         headerCell?.usernameButton.setTitle(post.creator, forState: .Normal)
+        headerCell?.userId.text = post.id
+        headerCell?.userId.hidden = true
         return headerCell!
     }
     
@@ -234,18 +236,28 @@ class FeedController: UITableViewController {
     }
 
 
-
     @IBAction func showUsersProfile(sender: UIButton){
         let mainSB = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let profileVC = mainSB.instantiateViewControllerWithIdentifier("Profile") as! ProfileController
         profileVC.profileUsername = sender.currentTitle
-        print("\(profileVC.profileUsername)")
         let barButton = UIBarButtonItem()
         barButton.title = "Back"
         navigationController?.navigationBar.topItem?.backBarButtonItem = barButton
         navigationController?.pushViewController(profileVC, animated: true)
     }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "showProfile" {
+//            if let indexPath = self.tableView.indexPathForSelectedRow {
+//                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! ProfileController
+//                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+//                controller.navigationItem.leftItemsSupplementBackButton = true
+//            }
+//        }
+//    }
 }
+
+
 
 
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
