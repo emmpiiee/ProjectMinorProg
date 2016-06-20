@@ -15,13 +15,15 @@ class Post{
     let timestamp:NSDate
     let image:UIImage?
     let caption:String?
+    let id: String?
     static var feed:Array<Post>?
     
     // initialize Post class
-    init(creator:String, image:UIImage?, caption:String?){
+    init(creator:String, image:UIImage?, caption:String?, id:String?){
         self.creator = creator
         self.image = image
         self.caption = caption
+        self.id = id
         timestamp = NSDate()
     }
 }
@@ -35,4 +37,5 @@ class PostCell: UITableViewCell {
 class PostHeaderCell: UITableViewCell {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var usernameButton: UIButton!
-}
+    @IBOutlet weak var userId: UILabel!
+    }

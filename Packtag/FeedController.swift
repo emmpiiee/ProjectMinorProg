@@ -14,6 +14,10 @@ class FeedController: UITableViewController {
     var checker = true
     var cursor1 = String()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     // reload data if home is clicked
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,6 +44,8 @@ class FeedController: UITableViewController {
             if checker {
                 checker = false
                 client.files.listFolder(path: "\(TodoManager.sharedInstance.path)").response { response, error in
+                    print("/Event1")
+                    print("printen van todo path hhier \(TodoManager.sharedInstance.path)")
                     print("*** List folder ***")
                     print("-----------------------------------\(response?.cursor)")
                     if let result = response {
@@ -61,7 +67,8 @@ class FeedController: UITableViewController {
                                 if let (metadata, url) = response {
                                     print("*** Download file ***")
                                     let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
-                                    if (subString.count == 5){
+                                    if (subString.count == 6){
+                                        print(subString.count)
                                         let data = NSData(contentsOfURL: url)
                                         let picture = UIImage (data: data!)
                                         print("Downloaded file name: \(metadata.name)")
@@ -70,7 +77,8 @@ class FeedController: UITableViewController {
                                         // get caption and creator out name
                                         let creator = subString[0]
                                         let caption = subString[1]
-                                        let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)")
+                                        let id = subString[2]
+                                        let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)", id: "\(id)")
                                         Post.feed!.append(newPost)
                                     }
                                 } else {
@@ -109,17 +117,22 @@ class FeedController: UITableViewController {
                             client.files.download(path: "\(TodoManager.sharedInstance.path)/\(entry.name)", destination: destination).response { response, error in
                                 if let (metadata, url) = response {
                                     print("*** Download file ***")
-                                    let data = NSData(contentsOfURL: url)
-                                    let picture = UIImage (data: data!)
-                                    print("Downloaded file name: \(metadata.name)")
-                                    print("Downloaded file url: \(url)")
-                                    fileImages?.append(picture!)
-                                    // get caption and creator out name
                                     let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
-                                    let creator = subString[0]
-                                    let caption = subString[1]
-                                    let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)")
-                                    Post.feed!.append(newPost)
+                                    if (subString.count == 6) {
+                                        let data = NSData(contentsOfURL: url)
+                                        let picture = UIImage (data: data!)
+                                        print("Downloaded file name: \(metadata.name)")
+                                        print("Downloaded file url: \(url)")
+                                        fileImages?.append(picture!)
+                                        // get caption and creator out name
+                                    
+                                        let creator = subString[0]
+                                        let caption = subString[1]
+                                        let id = subString[2]
+                                        TodoManager.sharedInstance.userId = subString[2]
+                                        let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)", id: "\(TodoManager.sharedInstance.userId)")
+                                        Post.feed!.append(newPost)
+                                    }
                                 } else {
                                     print(error!)
                                 }
@@ -181,7 +194,6 @@ class FeedController: UITableViewController {
             // set to creators image
         }
         headerCell?.usernameButton.setTitle(post.creator, forState: .Normal)
-        
         return headerCell!
     }
     
@@ -191,7 +203,7 @@ class FeedController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! PostCell
         cell.captionLabel.text = post.caption
         cell.imgView.image = post.image
-        
+        TodoManager.sharedInstance.arrayProfileId.append(post.id!)
         return cell
     }
     
@@ -209,7 +221,42 @@ class FeedController: UITableViewController {
         }
         return 208
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexPath = self.tableView.indexPathForSelectedRow
+        indexPath?.row
+        let cell = tableView.cellForRowAtIndexPath(indexPath!)
+        
+        // Unwrap that optional
+        if let label = cell?.textLabel?.text {
+            print("Tapped \(label)")
+        }
+    }
+
+
+
+    @IBAction func showUsersProfile(sender: UIButton){
+        let mainSB = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let profileVC = mainSB.instantiateViewControllerWithIdentifier("Profile") as! ProfileController
+        profileVC.profileUsername = sender.currentTitle
+        print("\(profileVC.profileUsername)")
+        let barButton = UIBarButtonItem()
+        barButton.title = "Back"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = barButton
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
 }
+
+
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "ShowProfile" {
+//            if let indexPath = self.tableView.indexPathForSelectedRow {
+//                let indexPath = tableView.indexPathForSelectedRow!
+//                let post = Post.feed![postIndex(indexPath.section)]
+//            }
+//        }
+//    }
+
 
 //class FeedController: UITableViewController {
 //    

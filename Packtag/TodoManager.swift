@@ -17,8 +17,12 @@ class TodoManager {
     
     // make table strings
     var userName = String()
-    var path = String()
+    var path : String = "/Event1"
     var userId = String()
+    
+    // 
+    var profileViewId = String()
+    var arrayProfileId : Array<String> = []
     
     //hoi
 }
