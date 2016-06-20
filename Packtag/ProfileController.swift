@@ -22,10 +22,10 @@ class ProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if (TodoManager.sharedInstance.userId == TodoManager.sharedInstance.profileViewId){
-            
+            editProfile.hidden = true
         }
         else {
-            editProfile.hidden = true
+            
         }
         if let currentUser = Profile.currentUser {
             self.postsLabel.text = "\(currentUser.posts.count)"
@@ -36,6 +36,8 @@ class ProfileController: UIViewController {
             print("There is no user logged in")
         }
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -43,20 +43,27 @@ class EditProfileController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func chooseProfile(sender: UIButton!){
-        let imageData: NSData = UIImagePNGRepresentation(selectedImage!)!
-        UIImage(data:imageData,scale:1.0)
-        if let client = Dropbox.authorizedClient {
-            client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userName)`\(TodoManager.sharedInstance.userId)`version`.jpg", body: imageData).response { response, error in
-                if let metadata = response {
-                    print("*** Upload file ****")
-                    print("Uploaded file name: \(metadata.name)")
-                    print("Uploaded file revision: \(metadata.rev)")
+        if (selectedImage == nil){
+            print("no selectedImage")
+        }
+        else {
+            let imageData: NSData = UIImagePNGRepresentation(selectedImage!)!
+            UIImage(data:imageData,scale:1.0)
+            if let client = Dropbox.authorizedClient {
+                client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userName)`\(TodoManager.sharedInstance.userId)`version`.jpg", body: imageData).response { response, error in
+                    if let metadata = response {
+                        print("*** Upload file ****")
+                        print("Uploaded file name: \(metadata.name)")
+                        print("Uploaded file revision: \(metadata.rev)")
+                    }
                 }
             }
-        }
+            
+        
         let tabBarController = self.presentingViewController as? UITabBarController
         tabBarController!.selectedIndex = 0
         self.dismissViewControllerAnimated(true, completion: nil)
+        }
 
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
