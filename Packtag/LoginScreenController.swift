@@ -23,7 +23,7 @@ class LoginScreenController: UIViewController {
         
         let accesToken = "9jdMHYq2mWAAAAAAAAAAImt9zBjH-LVWlaMy0U8tk8RDSCLk5kdxTDpRXZzKUb9a"
         let uid = "PackTag"
-        var packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
+        let packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
         
         TodoManager.sharedInstance.path = eventId.text!
         

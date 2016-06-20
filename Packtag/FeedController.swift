@@ -30,6 +30,7 @@ class FeedController: UITableViewController {
                 print("*** Get current account ***")
                 if let account = response {
                     print("Hello \(account.name.givenName)!")
+                    TodoManager.sharedInstance.userId = account.accountId
                     TodoManager.sharedInstance.userName = account.name.givenName
                 } else {
                     print(error!)
@@ -59,17 +60,19 @@ class FeedController: UITableViewController {
                             client.files.download(path: "\(TodoManager.sharedInstance.path)/\(entry.name)", destination: destination).response { response, error in
                                 if let (metadata, url) = response {
                                     print("*** Download file ***")
-                                    let data = NSData(contentsOfURL: url)
-                                    let picture = UIImage (data: data!)
-                                    print("Downloaded file name: \(metadata.name)")
-                                    print("Downloaded file url: \(url)")
-                                    fileImages?.append(picture!)
-                                    // get caption and creator out name
                                     let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
-                                    let creator = subString[0]
-                                    let caption = subString[1]
-                                    let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)")
-                                    Post.feed!.append(newPost)
+                                    if (subString.count == 5){
+                                        let data = NSData(contentsOfURL: url)
+                                        let picture = UIImage (data: data!)
+                                        print("Downloaded file name: \(metadata.name)")
+                                        print("Downloaded file url: \(url)")
+                                        fileImages?.append(picture!)
+                                        // get caption and creator out name
+                                        let creator = subString[0]
+                                        let caption = subString[1]
+                                        let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)")
+                                        Post.feed!.append(newPost)
+                                    }
                                 } else {
                                     print(error!)
                                 }
@@ -122,6 +125,7 @@ class FeedController: UITableViewController {
                                 }
                                 self.reloadTable()
                             }
+                            self.cursor1 = result.cursor
                         }
                     } else {
                         print(error!)

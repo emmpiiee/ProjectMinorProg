@@ -18,6 +18,7 @@ class TodoManager {
     // make table strings
     var userName = String()
     var path = String()
+    var userId = String()
     
     //hoi
 }

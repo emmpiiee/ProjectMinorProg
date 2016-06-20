@@ -25,7 +25,7 @@ class CaptionController: UIViewController {
                     UIImage(data:imageData,scale:1.0)
         
                     if let client = Dropbox.authorizedClient {
-                    client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userName)`\(captionText.text)`likes`version`.jpg", body: imageData).response { response, error in
+                    client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userName)`\(captionText.text)`\(TodoManager.sharedInstance.userId)`likes`version`.jpg", body: imageData).response { response, error in
                         if let metadata = response {
                             print("*** Upload file ****")
                             print("Uploaded file name: \(metadata.name)")
