@@ -24,12 +24,15 @@ class ProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (TodoManager.sharedInstance.userId == TodoManager.sharedInstance.profileViewId){
+        if (TodoManager.sharedInstance.userId == TodoManager.sharedInstance.profileViewId || TodoManager.sharedInstance.profileViewId == ""){
             print("dit is de gelijk aan: user id \(TodoManager.sharedInstance.userId) en profileviewid \(TodoManager.sharedInstance.profileViewId)")
         }
         else {
             editProfile.hidden = true
             print("dit is ongelijk aan aan: user id \(TodoManager.sharedInstance.userId) en profileviewid \(TodoManager.sharedInstance.profileViewId)")
+        }
+        if (TodoManager.sharedInstance.profileViewId == "") {
+            TodoManager.sharedInstance.profileViewId = TodoManager.sharedInstance.userId
         }
         profilePic.image = fileImage
     }
@@ -47,8 +50,8 @@ class ProfileController: UIViewController {
                 print("*** List folder ***")
                 if let result = response {
                     for entry in result.entries {
-//                        let subString = self.getStringsBeforeCharacter(entry.name, character: "`")
-//                        if(subString.count == 4) {
+                        let subString = self.getStringsBeforeCharacter(entry.name, character: "`")
+                        if(subString.count == 4) {
                         filenames?.append(entry.name)
                         print("dit is de array filenames \(filenames)")
                         // download a file
@@ -64,8 +67,8 @@ class ProfileController: UIViewController {
                             client.files.download(path: "\(TodoManager.sharedInstance.path)/\(entry.name)", destination: destination).response { response, error in
                                 if let (metadata, url) = response {
                                     print("*** Download file ***")
-                                    let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
-                                    if (subString.count == 4){
+//                                    let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
+//                                    if (subString.count == 4){
                                         print("het is 4 \(subString.count)")
                                         if (subString[1] == TodoManager.sharedInstance.profileViewId){
                                         let data = NSData(contentsOfURL: url)
@@ -74,13 +77,14 @@ class ProfileController: UIViewController {
                                         print("Downloaded file url: \(url)")
                                         self.fileImage = picture!
                                         self.profilePic.image = self.fileImage
+                                        TodoManager.sharedInstance.profileViewId = ""
                                         }
-                                    }
+//                                    }
                                 } else {
                                     print(error!)
                                 }
                             }
-//                        }
+                        }
                     }
                 }
             }
