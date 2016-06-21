@@ -64,6 +64,7 @@ class EditProfileController: UIViewController, UIImagePickerControllerDelegate, 
         tabBarController!.selectedIndex = 0
         self.dismissViewControllerAnimated(true, completion: nil)
         }
+        
 
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

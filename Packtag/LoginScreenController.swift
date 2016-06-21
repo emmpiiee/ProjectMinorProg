@@ -25,7 +25,12 @@ class LoginScreenController: UIViewController {
         let uid = "PackTag"
         let packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
         
-        TodoManager.sharedInstance.path = "/\(eventId.text!)"
+        if (eventId.text! == ""){
+            TodoManager.sharedInstance.path = ""
+        }
+        else {
+            TodoManager.sharedInstance.path = "/\(eventId.text!)"
+        }
         
         packTagClient.users.getCurrentAccount().response { response, error in
             print("*** Get current account pagtag ***")
