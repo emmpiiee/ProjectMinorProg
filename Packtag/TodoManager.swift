@@ -23,6 +23,7 @@ class TodoManager {
     // 
     var profileViewId = String()
     var arrayProfileId : Array<String> = []
+    var lastShowedProfileId = String()
     
     //hoi
 }

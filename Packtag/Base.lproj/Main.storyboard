@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -357,20 +359,20 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rVY-Pv-3Gd">
                                             <rect key="frame" x="8" y="8" width="32" height="31"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="32" id="Exr-Cf-7U0"/>
+                                                <constraint firstAttribute="width" constant="32" id="kP4-5z-UHy"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Hallo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FrW-b3-NaL">
-                                            <rect key="frame" x="125" y="13" width="42" height="21"/>
+                                            <rect key="frame" x="550" y="13" width="42" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="42" id="kFS-J9-NBK"/>
+                                                <constraint firstAttribute="width" constant="42" id="Ohx-ZN-dBq"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acA-oG-uEj">
-                                            <rect key="frame" x="46" y="8" width="71" height="31"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acA-oG-uEj">
+                                            <rect key="frame" x="46" y="8" width="546" height="31"/>
                                             <state key="normal" title="Username"/>
                                             <connections>
                                                 <action selector="showUsersProfile:" destination="Y4S-K6-b2H" eventType="touchUpInside" id="hPS-zM-xLk"/>
@@ -379,9 +381,17 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="rVY-Pv-3Gd" firstAttribute="top" secondItem="B7f-tC-N9J" secondAttribute="topMargin" id="0sA-Ih-h45"/>
-                                        <constraint firstItem="rVY-Pv-3Gd" firstAttribute="bottom" secondItem="B7f-tC-N9J" secondAttribute="bottomMargin" id="4n3-E4-h7t"/>
-                                        <constraint firstItem="rVY-Pv-3Gd" firstAttribute="leading" secondItem="B7f-tC-N9J" secondAttribute="leadingMargin" id="vN2-ke-fhl"/>
+                                        <constraint firstItem="rVY-Pv-3Gd" firstAttribute="bottom" secondItem="B7f-tC-N9J" secondAttribute="bottomMargin" id="08r-M3-dtC"/>
+                                        <constraint firstItem="rVY-Pv-3Gd" firstAttribute="bottom" secondItem="acA-oG-uEj" secondAttribute="bottom" id="4VT-9H-pdE"/>
+                                        <constraint firstItem="rVY-Pv-3Gd" firstAttribute="top" secondItem="B7f-tC-N9J" secondAttribute="topMargin" id="4uj-Vs-l5V"/>
+                                        <constraint firstItem="acA-oG-uEj" firstAttribute="trailing" secondItem="B7f-tC-N9J" secondAttribute="trailingMargin" id="97d-fy-c5e"/>
+                                        <constraint firstItem="acA-oG-uEj" firstAttribute="centerY" secondItem="FrW-b3-NaL" secondAttribute="centerY" id="BQv-ye-zSf"/>
+                                        <constraint firstItem="acA-oG-uEj" firstAttribute="trailing" secondItem="FrW-b3-NaL" secondAttribute="trailing" id="Egp-QS-JKH"/>
+                                        <constraint firstItem="rVY-Pv-3Gd" firstAttribute="top" secondItem="acA-oG-uEj" secondAttribute="top" id="EnL-MM-4uH"/>
+                                        <constraint firstItem="rVY-Pv-3Gd" firstAttribute="leading" secondItem="B7f-tC-N9J" secondAttribute="leadingMargin" id="FTc-Uh-wiv"/>
+                                        <constraint firstItem="acA-oG-uEj" firstAttribute="leading" secondItem="rVY-Pv-3Gd" secondAttribute="trailing" constant="6" id="RUx-ZT-eCk"/>
+                                        <constraint firstItem="FrW-b3-NaL" firstAttribute="baseline" secondItem="acA-oG-uEj" secondAttribute="firstBaseline" id="Xuc-Ji-n5u"/>
+                                        <constraint firstItem="acA-oG-uEj" firstAttribute="baseline" secondItem="FrW-b3-NaL" secondAttribute="firstBaseline" id="qO2-vl-AbQ"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

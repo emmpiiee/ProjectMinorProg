@@ -18,6 +18,9 @@ class FeedController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl = UIRefreshControl()
+        refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
     // reload data if home is clicked
@@ -26,9 +29,8 @@ class FeedController: UITableViewController {
         tableView.reloadData()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FeedController.reloadTable), name: "reloadTable", object: nil)
         refreshControl = UIRefreshControl()
-        refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        tableView.addSubview(refreshControl!) // not required when using UITableViewController
+
         
         if let client = Dropbox.authorizedClient {
             print(client)
@@ -38,7 +40,11 @@ class FeedController: UITableViewController {
                 if let account = response {
                     print("Hello \(account.name.givenName)!")
                     TodoManager.sharedInstance.userId = account.accountId
-                    TodoManager.sharedInstance.userName = account.name.givenName
+                    // capitalize names
+                    let name = String(account.name.givenName.characters.prefix(1)).uppercaseString + String(account.name.givenName.characters.dropFirst())
+                    let surname = String(account.name.surname.characters.prefix(1)).uppercaseString + String(account.name.surname.characters.dropFirst())
+                    TodoManager.sharedInstance.userName = "\(name) \(surname)"
+                    print(TodoManager.sharedInstance.userName)
                 } else {
                     print(error!)
                 }
@@ -52,7 +58,7 @@ class FeedController: UITableViewController {
             else {
                 print("fase 1")
                 print("this is cursor 1 \(self.cursor1)")
-                updateList(client, cursor: cursor1)
+                updateList(client, cursor: self.cursor1)
             }
         } else {
             print("error")
@@ -114,7 +120,7 @@ class FeedController: UITableViewController {
     }
     
     func updateList (client: DropboxClient, cursor: String) {
-        client.files.listFolderContinue(cursor: self.cursor1).response { response, error in
+        client.files.listFolderContinue(cursor: cursor).response { response, error in
             print("*** List folder ***")
             if let result = response {
                 print("Folder contents:")
@@ -153,7 +159,6 @@ class FeedController: UITableViewController {
                         } else {
                             print(error!)
                         }
-                        self.reloadTable()
                     }
                     self.cursor1 = result.cursor
                 }
@@ -180,9 +185,6 @@ class FeedController: UITableViewController {
     
     // relaod table
     func reloadTable (){
-        print("reloads table")
-//        tableView.reloadData()
-        viewWillAppear(true)
         return
     }
     
@@ -252,7 +254,7 @@ class FeedController: UITableViewController {
     }
     
     func refresh(sender:AnyObject) {
-        reloadTable()
+        viewWillAppear(true)
     }
     
 

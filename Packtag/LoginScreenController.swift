@@ -36,7 +36,6 @@ class LoginScreenController: UIViewController {
             print("*** Get current account pagtag ***")
             if let account = response {
                 print("Hello \(account.name.givenName)!")
-                
             } else {
                 print(error!)
             }

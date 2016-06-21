@@ -36,6 +36,10 @@ class ProfileController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if (TodoManager.sharedInstance.lastShowedProfileId == TodoManager.sharedInstance.profileViewId) {
+            return
+        }
+        else {
         var filenames: Array<String>? = []
         if let client = Dropbox.authorizedClient {
             // List folder
@@ -43,9 +47,12 @@ class ProfileController: UIViewController {
                 print("*** List folder ***")
                 if let result = response {
                     for entry in result.entries {
+//                        let subString = self.getStringsBeforeCharacter(entry.name, character: "`")
+//                        if(subString.count == 4) {
                         filenames?.append(entry.name)
                         print("dit is de array filenames \(filenames)")
                         // download a file
+                        
                         let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
                             let fileManager = NSFileManager.defaultManager()
                                 let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
@@ -73,9 +80,11 @@ class ProfileController: UIViewController {
                                     print(error!)
                                 }
                             }
-                        }
+//                        }
                     }
+                }
             }
+        }
         }
     }
     
