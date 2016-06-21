@@ -206,8 +206,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e0-xD-H1Y">
-                                <rect key="frame" x="191" y="208" width="88" height="30"/>
-                                <state key="normal" title="Select Photo"/>
+                                <rect key="frame" x="186" y="208" width="98" height="30"/>
+                                <state key="normal" title="Change Photo"/>
                                 <connections>
                                     <action selector="chooseProfile:" destination="qLb-50-esS" eventType="touchUpInside" id="6mB-PX-6tw"/>
                                 </connections>
@@ -270,7 +270,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTj-cZ-ZW4">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTj-cZ-ZW4">
                                 <rect key="frame" x="0.0" y="521" width="600" height="30"/>
                                 <color key="backgroundColor" red="0.20344362995703272" green="0.59407463519238357" blue="0.93467548076923079" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

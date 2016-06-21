@@ -30,7 +30,6 @@ class FeedController: UITableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FeedController.reloadTable), name: "reloadTable", object: nil)
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-
         
         if let client = Dropbox.authorizedClient {
             print(client)

@@ -51,7 +51,7 @@ class ProfileController: UIViewController {
                 if let result = response {
                     for entry in result.entries {
                         let subString = self.getStringsBeforeCharacter(entry.name, character: "`")
-                        if(subString.count == 4) {
+                        if(subString.count == 2) {
                         filenames?.append(entry.name)
                         print("dit is de array filenames \(filenames)")
                         // download a file
@@ -67,19 +67,16 @@ class ProfileController: UIViewController {
                             client.files.download(path: "\(TodoManager.sharedInstance.path)/\(entry.name)", destination: destination).response { response, error in
                                 if let (metadata, url) = response {
                                     print("*** Download file ***")
-//                                    let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
-//                                    if (subString.count == 4){
                                         print("het is 4 \(subString.count)")
-                                        if (subString[1] == TodoManager.sharedInstance.profileViewId){
-                                        let data = NSData(contentsOfURL: url)
-                                        let picture = UIImage (data: data!)
-                                        print("Downloaded file name: \(metadata.name)")
-                                        print("Downloaded file url: \(url)")
-                                        self.fileImage = picture!
-                                        self.profilePic.image = self.fileImage
-                                        TodoManager.sharedInstance.profileViewId = ""
+                                        if (subString[0] == TodoManager.sharedInstance.profileViewId){
+                                            let data = NSData(contentsOfURL: url)
+                                            let picture = UIImage (data: data!)
+                                            print("Downloaded file name: \(metadata.name)")
+                                            print("Downloaded file url: \(url)")
+                                            self.fileImage = picture!
+                                            self.profilePic.image = self.fileImage
+                                            TodoManager.sharedInstance.profileViewId = ""
                                         }
-//                                    }
                                 } else {
                                     print(error!)
                                 }
@@ -87,6 +84,7 @@ class ProfileController: UIViewController {
                         }
                     }
                 }
+                TodoManager.sharedInstance.arrayProfilePhotoNames = filenames!
             }
         }
         }

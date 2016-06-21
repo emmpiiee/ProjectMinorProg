@@ -47,32 +47,32 @@ class EditProfileController: UIViewController, UIImagePickerControllerDelegate, 
             print("no selectedImage")
         }
         else {
-            let imageData: NSData = UIImagePNGRepresentation(selectedImage!)!
-            UIImage(data:imageData,scale:1.0)
-            if let client = Dropbox.authorizedClient {
-                client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userName)`\(TodoManager.sharedInstance.userId)`version`.jpg", body: imageData).response { response, error in
-                    if let metadata = response {
-                        print("*** Upload file ****")
-                        print("Uploaded file name: \(metadata.name)")
-                        print("Uploaded file revision: \(metadata.rev)")
+                if(TodoManager.sharedInstance.arrayProfilePhotoNames.contains("\(TodoManager.sharedInstance.userId)`.jpg")){
+                    print("je hebt al profile pciture")
+                }
+                else {
+                    let imageData: NSData = UIImagePNGRepresentation(self.selectedImage!)!
+                    UIImage(data:imageData,scale:1.0)
+                    if let client = Dropbox.authorizedClient {
+                        client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userId)`.jpg", body: imageData).response { response, error in
+                            if let metadata = response {
+                                print("*** Upload file ****")
+                                print("Uploaded file name: \(metadata.name)")
+                                print("Uploaded file revision: \(metadata.rev)")
+                            }
+                        }
                     }
+//                    let tabBarController = self.presentingViewController as? UITabBarController
+//                    tabBarController!.selectedIndex = 2
+//                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
-            
-        
-        let tabBarController = self.presentingViewController as? UITabBarController
-        tabBarController!.selectedIndex = 0
-        self.dismissViewControllerAnimated(true, completion: nil)
         }
-        
 
-    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "selectPhoto"){
             let destinationVC = segue.destinationViewController as! CaptionController
             destinationVC.selectedImage = selectedImage
         }
     }
-
-    
 }

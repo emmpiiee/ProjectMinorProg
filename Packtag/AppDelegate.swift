@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("JOE")
         Post.feed = [Post]()
         print("jaja")
-        Post.feed?.append(Post(creator: "steve", image: nil, caption: "this is a test", id: ""))
+        Post.feed?.append(Post(creator: "steve", image: nil, caption: "this is a test", id: "?"))
         // Override point for customization after application launch.
         print("klaar")
         Dropbox.setupWithAppKey("wws46zauqc6bhyt")
