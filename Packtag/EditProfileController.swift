@@ -11,6 +11,7 @@ import SwiftyDropbox
 
 class EditProfileController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var selectedImageView: UIImageView!
+    @IBOutlet weak var ChangeButton: UIButton!
     var selectedImage: UIImage?
     
     override func viewDidLoad() {
@@ -47,28 +48,31 @@ class EditProfileController: UIViewController, UIImagePickerControllerDelegate, 
             print("no selectedImage")
         }
         else {
-                if(TodoManager.sharedInstance.arrayProfilePhotoNames.contains("\(TodoManager.sharedInstance.userId)`.jpg")){
-                    print("je hebt al profile pciture")
-                }
-                else {
-                    let imageData: NSData = UIImagePNGRepresentation(self.selectedImage!)!
-                    UIImage(data:imageData,scale:1.0)
-                    if let client = Dropbox.authorizedClient {
-                        client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userId)`.jpg", body: imageData).response { response, error in
-                            if let metadata = response {
-                                print("*** Upload file ****")
-                                print("Uploaded file name: \(metadata.name)")
-                                print("Uploaded file revision: \(metadata.rev)")
-                            }
-                        }
-                    }
-//                    let tabBarController = self.presentingViewController as? UITabBarController
-//                    tabBarController!.selectedIndex = 2
-//                    self.dismissViewControllerAnimated(true, completion: nil)
+            if(TodoManager.sharedInstance.arrayProfilePhotoNames.contains("\(TodoManager.sharedInstance.userId)`.jpg")){
+                print("je hebt al profile pciture")
+                if let client = Dropbox.authorizedClient {
+                    print("kom je hier een keer in")
+                    client.files.delete(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userId)`.jpg")
+                    print("\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userId)`.jpg")
+                    print("\(TodoManager.sharedInstance.userId)`.jpg")
                 }
             }
+            let imageData: NSData = UIImagePNGRepresentation(self.selectedImage!)!
+            UIImage(data:imageData,scale:1.0)
+            if let client = Dropbox.authorizedClient {
+                client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userId)`.jpg", body: imageData).response { response, error in
+                    if let metadata = response {
+                        print("*** Upload file ****")
+                        print("Uploaded file name: \(metadata.name)")
+                        print("Uploaded file revision: \(metadata.rev)")
+                    }
+                }
+            }
+            navigationController?.popViewControllerAnimated(true)
+            NSNotificationCenter.defaultCenter().postNotificationName("reloadProfile", object: nil)
         }
-
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "selectPhoto"){
             let destinationVC = segue.destinationViewController as! CaptionController

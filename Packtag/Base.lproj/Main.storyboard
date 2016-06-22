@@ -205,7 +205,7 @@
                                     <action selector="stopCamera:" destination="qLb-50-esS" eventType="touchUpInside" id="vuX-tR-6cd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e0-xD-H1Y">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Change" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e0-xD-H1Y">
                                 <rect key="frame" x="186" y="208" width="98" height="30"/>
                                 <state key="normal" title="Change Photo"/>
                                 <connections>
@@ -225,6 +225,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ChangeButton" destination="4e0-xD-H1Y" id="phB-zW-fAv"/>
                         <outlet property="selectedImageView" destination="3rr-vF-eWm" id="DH3-wd-QBn"/>
                     </connections>
                 </viewController>

@@ -39,6 +39,7 @@ class ProfileController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProfileController.reloadProfile), name: "reloadProfile", object: nil)
         if (TodoManager.sharedInstance.lastShowedProfileId == TodoManager.sharedInstance.profileViewId) {
             return
         }
@@ -94,6 +95,11 @@ class ProfileController: UIViewController {
     func getStringsBeforeCharacter (string: String, character: String) -> Array<String> {
         let subStringBefore = (string.componentsSeparatedByString(character))
         return subStringBefore
+    }
+    
+    func reloadProfile (){
+        viewDidLoad()
+        viewDidAppear(true)
     }
     
     override func didReceiveMemoryWarning() {
