@@ -64,38 +64,7 @@ class LoginScreenController: UIViewController {
             }
         }
         
-//        packTagClient.files.search(path: "", query: "Event").response { response, error in
-//            if let result = response {
-//                let folderIdString = result.matches[0].description
-//                print("folder id string\(folderIdString)")
-//
-//                let subString = folderIdString.componentsSeparatedByString("id = ")
-//                print(subString)
-//                let folderId = subString[1].componentsSeparatedByString("id:")
-//                print("folderId is nu \(folderId)")
-//                let folderId1 = folderId[1].componentsSeparatedByString(";")
-//                print("folderid1 \(folderId1[0])einde")
-//                let folderId2 = folderId1[0]
-//                let folderId3 = folderId2.substringToIndex(folderId2.endIndex.predecessor())
-//                print("final folderid \(folderId3)")
-//                
-////                let folderIdString = folderId.metadata
-////                print("folderidstring \(folderIdString)")
-//                let memberSelector = Sharing.MemberSelector.Email("emmaimmink@hotmail.com")
-//                print("member selector\(memberSelector)")
-//                let addMember = Sharing.AddMember(member: memberSelector)
-//                var arrayAddMember = Array<Sharing.AddMember>()
-//                arrayAddMember.append(addMember)
-//                print("check if nilllllllll \(arrayAddMember)")
-//                packTagClient.sharing.addFolderMember(sharedFolderId: folderId3, members: arrayAddMember)
-//            }
-//            else {
-//                print(error!)
-//            }
-//        }
-//        
-        if let client = Dropbox.authorizedClient{
-        client.files.search(path: "", query: "Hallo").response { response, error in
+        packTagClient.files.search(path: "", query: "Event1").response { response, error in
             if let result = response {
                 let folderIdString = result.matches[0].description
                 print("folder id string\(folderIdString)")
@@ -111,27 +80,66 @@ class LoginScreenController: UIViewController {
                 let folderId3 = folderId2.substringFromIndex(folderId2.startIndex.successor())
                 print("folderId3 = ....\(folderId3)....")
                 
-
+                
                 //                let folderIdString = folderId.metadata
                 //                print("folderidstring \(folderIdString)")
                 
                 
-                let memberSelector = Sharing.MemberSelector.Email("packtagapp@gmail.com")
+                let memberSelector = Sharing.MemberSelector.Email("emmaimmink@hotmail.com")
                 print("member selector\(memberSelector)")
                 let addMember = Sharing.AddMember(member: memberSelector)
                 var arrayAddMember = Array<Sharing.AddMember>()
                 arrayAddMember.append(addMember)
                 
-                client.sharing.addFolderMember(sharedFolderId: folderId3, members: arrayAddMember, quiet: false, customMessage: "hallo").response { response, error in
+                packTagClient.sharing.addFolderMember(sharedFolderId: folderId3, members: arrayAddMember, quiet: false, customMessage: "hallo").response { response, error in
                     if let errorcode = error {
                         print("errorcode is \(errorcode)")
                     }
-                    
-                }
+                    if let client = Dropbox.authorizedClient{
+                        client.sharing.mountFolder(sharedFolderId: folderId3)
+                    }
                 }
             }
         }
     }
+//        if let client = Dropbox.authorizedClient{
+//        client.files.search(path: "", query: "Hallo").response { response, error in
+//            if let result = response {
+//                let folderIdString = result.matches[0].description
+//                print("folder id string\(folderIdString)")
+//                
+//                let subString = folderIdString.componentsSeparatedByString("shared_folder_id")
+//                print(subString)
+//                let folderId = subString[1].componentsSeparatedByString("=")
+//                print("folderId is nu \(folderId)")
+//                let folderId1 = folderId[1].componentsSeparatedByString(";")
+//                print("folderid1 \(folderId1[0])einde")
+//                let folderId2 = folderId1[0]
+//                print("folderId2 = ....\(folderId2)....")
+//                let folderId3 = folderId2.substringFromIndex(folderId2.startIndex.successor())
+//                print("folderId3 = ....\(folderId3)....")
+//                
+//
+//                //                let folderIdString = folderId.metadata
+//                //                print("folderidstring \(folderIdString)")
+//                
+//                
+//                let memberSelector = Sharing.MemberSelector.Email("packtagapp@gmail.com")
+//                print("member selector\(memberSelector)")
+//                let addMember = Sharing.AddMember(member: memberSelector)
+//                var arrayAddMember = Array<Sharing.AddMember>()
+//                arrayAddMember.append(addMember)
+//                
+//                client.sharing.addFolderMember(sharedFolderId: folderId3, members: arrayAddMember, quiet: false, customMessage: "hallo").response { response, error in
+//                    if let errorcode = error {
+//                        print("errorcode is \(errorcode)")
+//                    }
+//                    
+//                }
+//                }
+//            }
+//        }
+//    }
     
         //        packTagClient.sharing.addFolderMember(sharedFolderId: folderId, members: arrayAddMember)
         //
