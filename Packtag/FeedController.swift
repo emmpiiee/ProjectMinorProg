@@ -171,6 +171,7 @@ class FeedController: UITableViewController {
     @IBAction func changeEventClicked(sender: AnyObject) {
         let tabBarController = self.presentingViewController as? UITabBarController
         self.dismissViewControllerAnimated(true, completion: nil)
+        Post.feed?.removeAll()
     }
     
     // every section needs only 1 row for only 1 post

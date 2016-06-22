@@ -14,10 +14,14 @@ class LoginScreenController: UIViewController {
     @IBOutlet weak var nameUser: UITextField!
     @IBOutlet weak var eventId: UITextField!
     @IBOutlet weak var createId: UITextField!
+    @IBOutlet weak var eventNotExisting: UILabel!
     
     var filenames: Array<String>? = []
 
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        eventNotExisting.hidden = true
+    }
     
     @IBAction func linkButtonPressed(sender: AnyObject) {
         
@@ -35,77 +39,82 @@ class LoginScreenController: UIViewController {
         else {
             TodoManager.sharedInstance.path = "/\(eventId.text!)"
         }
-//        
-//        packTagClient.users.getCurrentAccount().response { response, error in
-//            print("*** Get current account pagtag ***")
-//            if let account = response {
-//                print("Hello \(account.name.givenName)!")
-//            } else {
-//                print(error!)
-//            }
-//        }
-//        // List folder
-//        packTagClient.files.listFolder(path: "/\(TodoManager.sharedInstance.path)").response { response, error in
-//            print("*** List folder packtag ***")
-//            print("-----------------------------------\(response?.cursor)")
-//            if let result = response {
-//                print("Folder contents:")
-//                for entry in result.entries {
-//                    print(entry.name)
-//                    self.filenames?.append(entry.name)
-//                    print("dit is de array filenames \(self.filenames)")
-//                    // download a file
-//                    let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
-//                        let fileManager = NSFileManager.defaultManager()
-//                        let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-//                        // generate a unique name for this file in case we've seen it before
-//                        let UUID = NSUUID().UUIDString
-//                        let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
-//                        return directoryURL.URLByAppendingPathComponent(pathComponent)
-//                    }
-//                }
-//            }
-//        }
-        
-        packTagClient.files.search(path: "", query: "\(eventId.text!)").response { response, error in
+
+        // List folder
+        packTagClient.files.listFolder(path: "").response { response, error in
+            print("*** List folder packtag ***")
             if let result = response {
-                let folderIdString = result.matches[0].description
-                print("folder id string\(folderIdString)")
-                
-                let subString = folderIdString.componentsSeparatedByString("shared_folder_id")
-                print(subString)
-                let folderId = subString[1].componentsSeparatedByString("=")
-                print("folderId is nu \(folderId)")
-                let folderId1 = folderId[1].componentsSeparatedByString(";")
-                print("folderid1 \(folderId1[0])einde")
-                let folderId2 = folderId1[0]
-                print("folderId2 = ....\(folderId2)....")
-                let folderId3 = folderId2.substringFromIndex(folderId2.startIndex.successor())
-                print("folderId3 = ....\(folderId3)....")
-                
-                
-                //                let folderIdString = folderId.metadata
-                //                print("folderidstring \(folderIdString)")
-                
-                
-                let memberSelector = Sharing.MemberSelector.Email("emmaimmink@hotmail.com")
-                print("member selector\(memberSelector)")
-                let addMember = Sharing.AddMember(member: memberSelector)
-                var arrayAddMember = Array<Sharing.AddMember>()
-                arrayAddMember.append(addMember)
-                
-                packTagClient.sharing.addFolderMember(sharedFolderId: folderId3, members: arrayAddMember, quiet: true, customMessage: "Hallo, dit is een automatisch gegenereerd bericht.").response { response, error in
-                    if let errorcode = error {
-                        print("errorcode is \(errorcode)")
+                print("Folder contents:")
+                for entry in result.entries {
+                    print(entry.name)
+                    self.filenames?.append(entry.name)
+                    print("dit is de array filenames \(self.filenames)")
+                    // download a file
+                    let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+                        let fileManager = NSFileManager.defaultManager()
+                        let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                        // generate a unique name for this file in case we've seen it before
+                        let UUID = NSUUID().UUIDString
+                        let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+                        return directoryURL.URLByAppendingPathComponent(pathComponent)
                     }
-                    if let client = Dropbox.authorizedClient{
-                        client.sharing.mountFolder(sharedFolderId: folderId3)
+                }
+                let exists = self.filenames?.contains(self.eventId.text!)
+                if exists! {
+                    print("wordt dit uitgevoerd")
+                    packTagClient.files.search(path: "", query: "\(self.eventId.text!)").response { response, error in
+                        if let result = response {
+                            let folderIdString = result.matches[0].description
+                            print("folder id string\(folderIdString)")
+                            
+                            let subString = folderIdString.componentsSeparatedByString("shared_folder_id")
+                            print(subString)
+                            let folderId = subString[1].componentsSeparatedByString("=")
+                            print("folderId is nu \(folderId)")
+                            let folderId1 = folderId[1].componentsSeparatedByString(";")
+                            print("folderid1 \(folderId1[0])einde")
+                            let folderId2 = folderId1[0]
+                            print("folderId2 = ....\(folderId2)....")
+                            let folderId3 = folderId2.substringFromIndex(folderId2.startIndex.successor())
+                            print("folderId3 = ....\(folderId3)....")
+                            
+                            let memberSelector = Sharing.MemberSelector.Email("emmaimmink@hotmail.com")
+                            print("member selector\(memberSelector)")
+                            let addMember = Sharing.AddMember(member: memberSelector)
+                            var arrayAddMember = Array<Sharing.AddMember>()
+                            arrayAddMember.append(addMember)
+                            
+                            packTagClient.sharing.addFolderMember(sharedFolderId: folderId3, members: arrayAddMember, quiet: true, customMessage: "Hallo, dit is een automatisch gegenereerd bericht.").response { response, error in
+                                if let errorcode = error {
+                                    print("errorcode is \(errorcode)")
+                                }
+                                if let client = Dropbox.authorizedClient{
+                                    client.sharing.mountFolder(sharedFolderId: folderId3)
+                                }
+                            }
+                        }
                     }
+                    
+                }
+                else {
+                    self.eventNotExisting.hidden = false
+                    self.delay(3){
+                        self.eventNotExisting.hidden = true
+                    }
+                    
                 }
             }
         }
     }
 
+    func delay(delay: Double, closure: ()->()){
+        dispatch_after(
+                dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
+    }
 
     @IBAction func makeNewEvent(sender: AnyObject) {
         print("user needs to create a folder")
@@ -124,9 +133,6 @@ class LoginScreenController: UIViewController {
         packTagClient.sharing.shareFolder(path: "/\(createId.text!)")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
