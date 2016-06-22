@@ -44,7 +44,6 @@ class FeedController2: UITableViewController {
             if checker {
                 checker = false
                 client.files.listFolder(path: "\(TodoManager.sharedInstance.path)").response { response, error in
-                    print("/Event1")
                     print("printen van todo path hhier \(TodoManager.sharedInstance.path)")
                     print("*** List folder ***")
                     print("-----------------------------------\(response?.cursor)")

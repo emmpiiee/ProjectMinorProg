@@ -57,6 +57,7 @@ class FeedController: UITableViewController {
             else {
                 print("fase 1")
                 print("this is cursor 1 \(self.cursor1)")
+                print(TodoManager.sharedInstance.path)
                 updateList(client, cursor: self.cursor1)
             }
         } else {
@@ -64,7 +65,6 @@ class FeedController: UITableViewController {
         }
         print("end of viewwillappear")
     }
-    
     
     func updateList (client: DropboxClient, path: String) {
         client.files.listFolder(path: "\(TodoManager.sharedInstance.path)").response { response, error in
@@ -166,6 +166,7 @@ class FeedController: UITableViewController {
             }
         }
     }
+    
     
     // every section needs only 1 row for only 1 post
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
