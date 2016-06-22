@@ -95,6 +95,12 @@ class LoginScreenController: UIViewController {
                         }
                     }
                     
+                    let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let resultViewController = storyboard.instantiateViewControllerWithIdentifier("ChooseEvent")
+                    self.presentViewController(resultViewController, animated: true, completion: nil)
+                    
+//                    let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FeedController") as! FeedController
+//                    self.navigationController!.pushViewController(secondViewController, animated: true)
                 }
                 else {
                     self.eventNotExisting.hidden = false
