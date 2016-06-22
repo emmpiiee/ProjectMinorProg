@@ -463,7 +463,16 @@
                             <outlet property="delegate" destination="Stq-ID-CKv" id="NCt-pr-1SK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="PackTag" id="PQY-dK-1og"/>
+                    <navigationItem key="navigationItem" title="PackTag" id="PQY-dK-1og">
+                        <barButtonItem key="leftBarButtonItem" title="Change Event" id="Hxo-oz-OM7">
+                            <connections>
+                                <action selector="changeEventClicked:" destination="Stq-ID-CKv" id="4LM-1E-nJg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="changeEvent" destination="Hxo-oz-OM7" id="ikc-gt-KMW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYA-u4-qEu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

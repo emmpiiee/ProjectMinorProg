@@ -10,7 +10,8 @@ import UIKit
 import SwiftyDropbox
 
 class FeedController: UITableViewController {
-    
+
+    @IBOutlet weak var changeEvent: UIBarButtonItem!
     var checker = true
     var cursor1 = String()
     var filenames: Array<String>? = []
@@ -167,6 +168,10 @@ class FeedController: UITableViewController {
         }
     }
     
+    @IBAction func changeEventClicked(sender: AnyObject) {
+        let tabBarController = self.presentingViewController as? UITabBarController
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     // every section needs only 1 row for only 1 post
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
