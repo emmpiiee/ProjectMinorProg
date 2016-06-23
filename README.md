@@ -1,3 +1,8 @@
+PACKTAG
+23-06-2016
+Emma Immink
+Copyright © 2016 Emma Immink. All rights reserved.
+
 # ProjectMinorProg
 
 ## Summary app
