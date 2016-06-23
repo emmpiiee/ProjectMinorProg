@@ -20,21 +20,20 @@ Chasing down photos after an event that you organized is a hassle that most of u
 - option to have a profile with information about guests (also a picture that shows guests) (Option)
 
 ### Data
-No external datasets will be used for this app. We'll make our own database for the photos via firebase. This we will extract using JSON and Swift.
-More information in the sub API
+No external datasets will be used for this app. We'll make our own database with photos via Dropbox. This we will extract using Swift.
+More information in the sub API.
 
 ### Parts App
 Seperate parts of the app can be defined. 
-- You'll need a login to the correct wedding and login to your account (maybe using facebook) with a certain security so not anyone can log in your account
+- You'll need a login to the correct event and login to your account (using Dropbox) with a certain security so not anyone can log in your account
 - You'll need an option to make photos or add existing photos from your library to the wall
 - You'll need an option to see the wall with all the posted photo's 
 - (optional) You'll need an option to change you're profile and see all your posted photos
 - (optional) You'll need an option to see other the profile and the pictures other guest posted.
 
 ### API
-We need to create our own online database, which can handle the size of a photo. The API of firebase will fullfill this whish. 
-We need to make it possible to extraxt and push photos to the online database. We wont use the API of instagram because this will require the user to also upload photos on their timeline on instagram. This will not work because maybe some photos you'll want to post on the event app, you'll not want to post on your instagram account. 
-Also opening the camera needs aan API.
+We need to create our own online database, which can handle the size of a photo. The API of Dropbox will fullfill this whish. 
+We need to make it possible to extraxt and push photos to the online database and create a direct folder on your computer. We wont use the API of instagram because this will require the user to also upload photos on their timeline on instagram. This will not work because maybe some photos you'll want to post on the event app, you'll not want to post on your instagram account. 
 
 ### Difficulties
 - It will be difficult to create an online database with the size of photos and extract these.
