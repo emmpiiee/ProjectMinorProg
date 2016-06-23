@@ -45,8 +45,8 @@ We need to make it possible to extraxt and push photos to the online database an
 - It's similair to facebook, as in that facebook is able to create groups and post things online for only a group. Only this isn't used (because of the interface) as an app to keep everyone up to date and to make instagram like posts. 
 
 ## Photos
-![alt text](https://github.com/emmpiiee/ProjectMinorProg/blob/master/doc/Schermafbeelding%202016-06-23%20om%2022.54.20.png "Logo Title Text 1")
 ![alt text](https://github.com/emmpiiee/ProjectMinorProg/blob/master/doc/Schermafbeelding%202016-06-23%20om%2022.54.35.png "Logo Title Text 1")
+![alt text](https://github.com/emmpiiee/ProjectMinorProg/blob/master/doc/Schermafbeelding%202016-06-23%20om%2022.54.20.png "Logo Title Text 1")
 ![alt text](https://github.com/emmpiiee/ProjectMinorProg/blob/master/doc/Schermafbeelding%202016-06-23%20om%2022.55.44.png "Logo Title Text 1")
 ![alt text](https://github.com/emmpiiee/ProjectMinorProg/blob/master/doc/Schermafbeelding%202016-06-23%20om%2022.56.09.png "Logo Title Text 1")
 ![alt text](https://github.com/emmpiiee/ProjectMinorProg/blob/master/doc/Schermafbeelding%202016-06-23%20om%2022.56.32.png "Logo Title Text 1")
