@@ -42,5 +42,5 @@ class PostHeaderCell: UITableViewCell {
         print("user id\(userId.text)")
         print("user name \(usernameButton.currentTitle)")
         TodoManager.sharedInstance.profileViewId = userId.text!
-        }
     }
+}

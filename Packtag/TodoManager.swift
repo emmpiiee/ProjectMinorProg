@@ -20,7 +20,7 @@ class TodoManager {
     var path : String = ""
     var userId = String()
     
-    // 
+    //
     var profileViewId = String()
     var arrayProfileId : Array<String> = []
     var lastShowedProfileId = String()

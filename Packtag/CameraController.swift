@@ -14,10 +14,23 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var sourceLabel: UILabel!
     var selectedImage: UIImage?
     
+    @IBOutlet weak var showCaptionController: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sourceLabel.text = "No image selected"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CameraController.clearImage), name: "clearImage", object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        if (selectedImage == nil){
+            showCaptionController.hidden = true
+        }
+        else {
+            showCaptionController.hidden = false
+            sourceLabel.hidden = true
+        }
     }
     
     func clearImage () {
@@ -47,6 +60,7 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
     }
     
     @IBAction func stopCamera(sender: UIButton!){
+        print("vanaf hier ")
         NSNotificationCenter.defaultCenter().postNotificationName("reloadTable", object: nil)
     }
     

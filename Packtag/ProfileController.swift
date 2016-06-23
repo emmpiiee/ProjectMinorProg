@@ -11,8 +11,8 @@ import SwiftyDropbox
 
 class ProfileController: UIViewController {
     @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var postsLabel: UILabel!
     @IBOutlet weak var editProfile: UIButton!
+    
     @IBAction func editProfile(sender: AnyObject){
         print("users want to edit profile")
     }
@@ -44,30 +44,30 @@ class ProfileController: UIViewController {
             return
         }
         else {
-        var filenames: Array<String>? = []
-        if let client = Dropbox.authorizedClient {
-            // List folder
-            client.files.listFolder(path: "\(TodoManager.sharedInstance.path)").response { response, error in
-                print("*** List folder ***")
-                if let result = response {
-                    for entry in result.entries {
-                        let subString = self.getStringsBeforeCharacter(entry.name, character: "`")
-                        if(subString.count == 2) {
-                        filenames?.append(entry.name)
-                        print("dit is de array filenames \(filenames)")
-                        // download a file
-                        
-                        let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
-                            let fileManager = NSFileManager.defaultManager()
-                                let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-                                // generate a unique name for this file in case we've seen it before
-                                let UUID = NSUUID().UUIDString
-                                let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
-                                return directoryURL.URLByAppendingPathComponent(pathComponent)
-                            }
-                            client.files.download(path: "\(TodoManager.sharedInstance.path)/\(entry.name)", destination: destination).response { response, error in
-                                if let (metadata, url) = response {
-                                    print("*** Download file ***")
+            var filenames: Array<String>? = []
+            if let client = Dropbox.authorizedClient {
+                // List folder
+                client.files.listFolder(path: "\(TodoManager.sharedInstance.path)").response { response, error in
+                    print("*** List folder ***")
+                    if let result = response {
+                        for entry in result.entries {
+                            let subString = self.getStringsBeforeCharacter(entry.name, character: "`")
+                            if(subString.count == 2) {
+                                filenames?.append(entry.name)
+                                print("dit is de array filenames \(filenames)")
+                                // download a file
+                                
+                                let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+                                    let fileManager = NSFileManager.defaultManager()
+                                    let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                                    // generate a unique name for this file in case we've seen it before
+                                    let UUID = NSUUID().UUIDString
+                                    let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+                                    return directoryURL.URLByAppendingPathComponent(pathComponent)
+                                }
+                                client.files.download(path: "\(TodoManager.sharedInstance.path)/\(entry.name)", destination: destination).response { response, error in
+                                    if let (metadata, url) = response {
+                                        print("*** Download file ***")
                                         print("het is 4 \(subString.count)")
                                         if (subString[0] == TodoManager.sharedInstance.profileViewId){
                                             let data = NSData(contentsOfURL: url)
@@ -78,16 +78,16 @@ class ProfileController: UIViewController {
                                             self.profilePic.image = self.fileImage
                                             TodoManager.sharedInstance.profileViewId = ""
                                         }
-                                } else {
-                                    print(error!)
+                                    } else {
+                                        print(error!)
+                                    }
                                 }
                             }
                         }
                     }
+                    TodoManager.sharedInstance.arrayProfilePhotoNames = filenames!
                 }
-                TodoManager.sharedInstance.arrayProfilePhotoNames = filenames!
             }
-        }
         }
     }
     

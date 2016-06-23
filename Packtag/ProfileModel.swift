@@ -25,7 +25,7 @@ class Profile {
         self.posts = posts
         self.picture = picture
     }
-
+    
     // make function createUser to create a new profile
     static func createUser(username:String!) -> Profile {
         return Profile(username: username, followers: Array<String>(), following: Array<String>(), posts: Array<Post>() , picture: nil)

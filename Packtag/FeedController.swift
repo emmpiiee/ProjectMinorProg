@@ -10,7 +10,7 @@ import UIKit
 import SwiftyDropbox
 
 class FeedController: UITableViewController {
-
+    
     @IBOutlet weak var changeEvent: UIBarButtonItem!
     var checker = true
     var cursor1 = String()
@@ -19,6 +19,7 @@ class FeedController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewdidload")
         refreshControl = UIRefreshControl()
         refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -29,6 +30,7 @@ class FeedController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FeedController.reloadTable), name: "reloadTable", object: nil)
+        print("view will apaar")
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
@@ -54,7 +56,7 @@ class FeedController: UITableViewController {
                 checker = false
                 updateList(client, path: TodoManager.sharedInstance.path)
             }
-            // if for statement 1 time executed
+                // if for statement 1 time executed
             else {
                 print("fase 1")
                 print("this is cursor 1 \(self.cursor1)")
@@ -263,7 +265,7 @@ class FeedController: UITableViewController {
         viewWillAppear(true)
     }
     
-
+    
     @IBAction func showUsersProfile(sender: UIButton){
         let mainSB = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let profileVC = mainSB.instantiateViewControllerWithIdentifier("Profile") as! ProfileController

@@ -21,7 +21,7 @@ class LoginScreenController: UIViewController {
     @IBOutlet weak var makeNewEvent: UIButton!
     
     var filenames: Array<String>? = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         eventNotExisting.hidden = true
@@ -63,7 +63,7 @@ class LoginScreenController: UIViewController {
             print("User is already authorized!")
             print(Dropbox.authorizedClient!)
         }
-
+        
         // List folder
         packTagClient.files.listFolder(path: "").response { response, error in
             print("*** List folder packtag ***")
@@ -124,8 +124,8 @@ class LoginScreenController: UIViewController {
                     let resultViewController = storyboard.instantiateViewControllerWithIdentifier("ChooseEvent")
                     self.presentViewController(resultViewController, animated: true, completion: nil)
                     
-//                    let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FeedController") as! FeedController
-//                    self.navigationController!.pushViewController(secondViewController, animated: true)
+                    //                    let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FeedController") as! FeedController
+                    //                    self.navigationController!.pushViewController(secondViewController, animated: true)
                 }
                 else {
                     self.eventNotExisting.hidden = false
@@ -137,16 +137,16 @@ class LoginScreenController: UIViewController {
             }
         }
     }
-
+    
     func delay(delay: Double, closure: ()->()){
         dispatch_after(
-                dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))
+            dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))
             ),
             dispatch_get_main_queue(),
             closure
         )
     }
-
+    
     @IBAction func makeNewEvent(sender: AnyObject) {
         filenames?.removeAll()
         let accesToken = "9jdMHYq2mWAAAAAAAAAAImt9zBjH-LVWlaMy0U8tk8RDSCLk5kdxTDpRXZzKUb9a"
@@ -170,25 +170,25 @@ class LoginScreenController: UIViewController {
                         return directoryURL.URLByAppendingPathComponent(pathComponent)
                     }
                 }
-        let exists = self.filenames?.contains(self.createId.text!)
-        print("this is filenames \(self.filenames!)")
-        print(exists!)
-        if exists! {
-            print("this already exists")
-            self.eventExisting.hidden = false
-            self.delay(3){
-                self.eventExisting.hidden = true
-            }
-        }
-        else{
-                self.eventMade.hidden = false
-                self.makeNewEvent.hidden = true
-            self.delay(6){
-                self.eventMade.hidden = true
-                self.makeNewEvent.hidden = false
-            }
-                packTagClient.files.createFolder(path: "/\(self.createId.text!)")
-                packTagClient.sharing.shareFolder(path: "/\(self.createId.text!)")
+                let exists = self.filenames?.contains(self.createId.text!)
+                print("this is filenames \(self.filenames!)")
+                print(exists!)
+                if exists! {
+                    print("this already exists")
+                    self.eventExisting.hidden = false
+                    self.delay(3){
+                        self.eventExisting.hidden = true
+                    }
+                }
+                else{
+                    self.eventMade.hidden = false
+                    self.makeNewEvent.hidden = true
+                    self.delay(6){
+                        self.eventMade.hidden = true
+                        self.makeNewEvent.hidden = false
+                    }
+                    packTagClient.files.createFolder(path: "/\(self.createId.text!)")
+                    packTagClient.sharing.shareFolder(path: "/\(self.createId.text!)")
                 }
             }
         }
