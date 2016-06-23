@@ -17,8 +17,8 @@ class CheckCorrectEventController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkEvent.text = "Wait untill your event is loaded.."
-        eventId.setTitle("\(TodoManager.sharedInstance.path)", forState: .Normal)
+        // Make button for event and hide first 15 seconds in order to share folder.
+        eventId.setTitle("\(TodoManager.sharedInstance.eventId)", forState: .Normal)
         eventId.hidden = true
         delay(15){
             self.checkEvent.hidden = true
@@ -27,6 +27,7 @@ class CheckCorrectEventController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        // Remove all previous feed.
         Post.feed?.removeAll()
     }
     
@@ -35,6 +36,7 @@ class CheckCorrectEventController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Delay function executes code after filled in seconds. 
     func delay(delay: Double, closure: ()->()){
         dispatch_after(
             dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))

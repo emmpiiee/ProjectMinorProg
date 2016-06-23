@@ -54,9 +54,11 @@ class LoginScreenController: UIViewController {
         // Make path voor eventId the user choose.
         if (eventId.text! == ""){
             TodoManager.sharedInstance.path = ""
+            TodoManager.sharedInstance.eventId = "\(eventId.text!)"
         }
         else {
             TodoManager.sharedInstance.path = "/\(eventId.text!)"
+            TodoManager.sharedInstance.eventId = "\(eventId.text!)"
         }
         
         // If no dropbox user is authorized, log in pop-up.
@@ -66,7 +68,7 @@ class LoginScreenController: UIViewController {
             print("User is already authorized!")
             print(Dropbox.authorizedClient!)
         }
-        
+
         // List folder contents.
         packTagClient.files.listFolder(path: "").response { response, error in
             if let result = response {
