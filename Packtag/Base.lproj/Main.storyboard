@@ -613,6 +613,12 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This event id is too long!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rl-YT-gvb">
+                                <rect key="frame" x="20" y="394" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0EV-Rq-41w">
                                 <rect key="frame" x="20" y="562" width="560" height="30"/>
                                 <state key="normal" title="Change User?"/>
@@ -620,6 +626,12 @@
                                     <action selector="changeUserClicked:" destination="Z5a-9x-gDS" eventType="touchUpInside" id="WeG-E6-VeC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No spaces allowed in event id!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zt-el-KVP">
+                                <rect key="frame" x="20" y="394" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -630,6 +642,7 @@
                             <constraint firstItem="ysb-dM-ZZJ" firstAttribute="top" secondItem="cPT-fz-eBK" secondAttribute="bottom" constant="8" symbolic="YES" id="91D-rO-f3J"/>
                             <constraint firstItem="AZI-tR-Xn6" firstAttribute="trailing" secondItem="HaF-4U-10H" secondAttribute="trailing" id="A7h-s8-HOm"/>
                             <constraint firstItem="HaF-4U-10H" firstAttribute="leading" secondItem="5bh-hV-dKP" secondAttribute="leading" id="AIG-8Z-VPX"/>
+                            <constraint firstItem="3Zt-el-KVP" firstAttribute="baseline" secondItem="ysb-dM-ZZJ" secondAttribute="baseline" id="Bmd-qR-CS0"/>
                             <constraint firstItem="YuQ-Ms-XSI" firstAttribute="leading" secondItem="AZI-tR-Xn6" secondAttribute="leading" id="CSU-M0-E8J"/>
                             <constraint firstItem="5bh-hV-dKP" firstAttribute="trailing" secondItem="XbT-Lc-BgC" secondAttribute="trailing" id="Chm-wK-ygd"/>
                             <constraint firstItem="HaF-4U-10H" firstAttribute="top" secondItem="AZI-tR-Xn6" secondAttribute="bottom" constant="8" symbolic="YES" id="DfP-tE-Q6I"/>
@@ -637,14 +650,19 @@
                             <constraint firstItem="YuQ-Ms-XSI" firstAttribute="trailing" secondItem="AZI-tR-Xn6" secondAttribute="trailing" id="IEB-YP-mI1"/>
                             <constraint firstItem="ysb-dM-ZZJ" firstAttribute="baseline" secondItem="hY6-11-fER" secondAttribute="baseline" id="Iz1-Nk-ytT"/>
                             <constraint firstItem="AZI-tR-Xn6" firstAttribute="leading" secondItem="HaF-4U-10H" secondAttribute="leading" id="Jol-MX-uhr"/>
+                            <constraint firstItem="3Zt-el-KVP" firstAttribute="trailing" secondItem="2Rl-YT-gvb" secondAttribute="trailing" id="K5c-WH-bIX"/>
+                            <constraint firstItem="2Rl-YT-gvb" firstAttribute="leading" secondItem="ysb-dM-ZZJ" secondAttribute="leading" id="K9f-OF-pSc"/>
                             <constraint firstItem="cPT-fz-eBK" firstAttribute="trailing" secondItem="ysb-dM-ZZJ" secondAttribute="trailing" id="KB9-cy-btH"/>
                             <constraint firstItem="hY6-11-fER" firstAttribute="leading" secondItem="0EV-Rq-41w" secondAttribute="leading" id="KIX-uY-0Nm"/>
                             <constraint firstItem="Sx4-hq-H5V" firstAttribute="trailing" secondItem="40S-TV-RVg" secondAttribute="trailingMargin" id="LkG-r4-sXT"/>
                             <constraint firstItem="Sx4-hq-H5V" firstAttribute="top" secondItem="hb0-8V-4SG" secondAttribute="bottom" constant="8" symbolic="YES" id="Mb3-eR-DET"/>
                             <constraint firstItem="cPT-fz-eBK" firstAttribute="top" secondItem="XbT-Lc-BgC" secondAttribute="bottom" constant="8" symbolic="YES" id="ORv-e6-Kzf"/>
                             <constraint firstItem="hY6-11-fER" firstAttribute="trailing" secondItem="ysb-dM-ZZJ" secondAttribute="trailing" id="TV8-0e-rFd"/>
+                            <constraint firstItem="3Zt-el-KVP" firstAttribute="baseline" secondItem="2Rl-YT-gvb" secondAttribute="baseline" id="Tug-iW-8wE"/>
                             <constraint firstItem="cPT-fz-eBK" firstAttribute="leading" secondItem="ysb-dM-ZZJ" secondAttribute="leading" id="VAz-kS-cjQ"/>
+                            <constraint firstItem="3Zt-el-KVP" firstAttribute="leading" secondItem="hY6-11-fER" secondAttribute="leading" id="VJs-SL-6pq"/>
                             <constraint firstItem="XbT-Lc-BgC" firstAttribute="leading" secondItem="cPT-fz-eBK" secondAttribute="leading" id="XDB-99-fTU"/>
+                            <constraint firstItem="3Zt-el-KVP" firstAttribute="trailing" secondItem="ysb-dM-ZZJ" secondAttribute="trailing" id="XTk-m7-xQ6"/>
                             <constraint firstItem="HaF-4U-10H" firstAttribute="trailing" secondItem="5bh-hV-dKP" secondAttribute="trailing" id="Yes-iu-aV3"/>
                             <constraint firstItem="AZI-tR-Xn6" firstAttribute="top" secondItem="YuQ-Ms-XSI" secondAttribute="bottom" constant="8" symbolic="YES" id="azS-fh-mZw"/>
                             <constraint firstItem="Sx4-hq-H5V" firstAttribute="trailing" secondItem="GDk-Bo-q8J" secondAttribute="trailing" id="cJ1-VN-9zV"/>
@@ -671,6 +689,8 @@
                         <outlet property="eventNotExisting" destination="HaF-4U-10H" id="33t-aU-RxJ"/>
                         <outlet property="makeNewEvent" destination="cPT-fz-eBK" id="K54-LZ-iPT"/>
                         <outlet property="nameUser" destination="XbT-Lc-BgC" id="ATj-np-gw4"/>
+                        <outlet property="noSpacesAllowed" destination="3Zt-el-KVP" id="I1l-z1-3lB"/>
+                        <outlet property="tooLongId" destination="2Rl-YT-gvb" id="4tL-xq-hzL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZEf-A1-3PO" userLabel="First Responder" sceneMemberID="firstResponder"/>

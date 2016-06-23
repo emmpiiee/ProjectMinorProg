@@ -56,6 +56,9 @@ class FeedController: UITableViewController {
                 checker = false
                 updateList(client, path: TodoManager.sharedInstance.path)
             }
+            else if (cursor1 == ""){
+                updateList(client, path: TodoManager.sharedInstance.path)
+            }
                 // if for statement 1 time executed
             else {
                 print("fase 1")

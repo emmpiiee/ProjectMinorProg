@@ -19,6 +19,8 @@ class LoginScreenController: UIViewController {
     @IBOutlet weak var changeAccount: UIButton!
     @IBOutlet weak var eventMade: UILabel!
     @IBOutlet weak var makeNewEvent: UIButton!
+    @IBOutlet weak var tooLongId: UILabel!
+    @IBOutlet weak var noSpacesAllowed: UILabel!
     
     var filenames: Array<String>? = []
     
@@ -27,6 +29,8 @@ class LoginScreenController: UIViewController {
         eventNotExisting.hidden = true
         eventExisting.hidden = true
         eventMade.hidden = true
+        noSpacesAllowed.hidden = true
+        tooLongId.hidden = true
         if let client = Dropbox.authorizedClient{
             client.users.getCurrentAccount().response { response, error in
                 if let account = response {
@@ -178,11 +182,23 @@ class LoginScreenController: UIViewController {
                 let exists = self.filenames?.contains(self.createId.text!)
                 print("this is filenames \(self.filenames!)")
                 print(exists!)
-                if (exists! || self.createId.text! == ""){
+                if (exists! || self.createId.text! == "" ){
                     print("this already exists")
                     self.eventExisting.hidden = false
                     self.delay(3){
                         self.eventExisting.hidden = true
+                    }
+                }
+                else if (self.createId.text!.characters.count >= 30) {
+                    self.tooLongId.hidden = false
+                    self.delay(3){
+                        self.tooLongId.hidden = true
+                    }
+                }
+                else if (self.createId.text!.rangeOfString(" ") != nil){
+                    self.noSpacesAllowed.hidden = false
+                    self.delay(3){
+                        self.noSpacesAllowed.hidden = true
                     }
                 }
                 else{
