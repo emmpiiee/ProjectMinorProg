@@ -26,7 +26,7 @@ class ProfileController: UIViewController {
         super.viewDidLoad()
         // Show edit if current user same as profileUser.
         if (TodoManager.sharedInstance.userId == TodoManager.sharedInstance.profileViewId || TodoManager.sharedInstance.profileViewId == ""){
-            return
+            print("hallo")
         }
             // Don't show edit if current user and profile user are different.
         else {

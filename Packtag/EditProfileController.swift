@@ -10,6 +10,7 @@ import UIKit
 import SwiftyDropbox
 
 class EditProfileController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // Create outlets and variables.
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var ChangeButton: UIButton!
     var selectedImage: UIImage?
@@ -18,12 +19,14 @@ class EditProfileController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
     }
     
+    // Controller to pick item from library or make photo.
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage
         self.selectedImageView.image = selectedImage
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // Show screen and take photo if button is clicked.
     @IBAction func takePhoto(sender: UIButton!){
         let picker = UIImagePickerController()
         picker.allowsEditing = true
@@ -31,6 +34,8 @@ class EditProfileController: UIViewController, UIImagePickerControllerDelegate, 
         picker.delegate = self
         self.presentViewController(picker, animated: true, completion: nil)
     }
+    
+    // Show screen and pick photo if button is clicked.
     @IBAction func selectPhoto(sender: UIButton!){
         let picker = UIImagePickerController()
         picker.allowsEditing = true
@@ -39,35 +44,31 @@ class EditProfileController: UIViewController, UIImagePickerControllerDelegate, 
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
+    // Reload table if camera stopped.
     @IBAction func stopCamera(sender: UIButton!){
         NSNotificationCenter.defaultCenter().postNotificationName("reloadTable", object: nil)
     }
     
+    // If button clicked change profile picture and delete old one.
     @IBAction func chooseProfile(sender: UIButton!){
+        // Don't continue if selected image is nil.
         if (selectedImage == nil){
             print("no selectedImage")
         }
         else {
             if(TodoManager.sharedInstance.arrayProfilePhotoNames.contains("\(TodoManager.sharedInstance.userId)`.jpg")){
-                print("je hebt al profile pciture")
+                // Delete old photo.
                 if let client = Dropbox.authorizedClient {
-                    print("kom je hier een keer in")
                     client.files.delete(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userId)`.jpg")
-                    print("\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userId)`.jpg")
-                    print("\(TodoManager.sharedInstance.userId)`.jpg")
                 }
             }
+            // Set selected image to NSdata
             let imageData: NSData = UIImagePNGRepresentation(self.selectedImage!)!
-            UIImage(data:imageData,scale:1.0)
             if let client = Dropbox.authorizedClient {
                 client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userId)`.jpg", body: imageData).response { response, error in
-                    if let metadata = response {
-                        print("*** Upload file ****")
-                        print("Uploaded file name: \(metadata.name)")
-                        print("Uploaded file revision: \(metadata.rev)")
-                    }
                 }
             }
+            // Reload profile and return to profile.
             navigationController?.popViewControllerAnimated(true)
             NSNotificationCenter.defaultCenter().postNotificationName("reloadProfile", object: nil)
         }
