@@ -17,12 +17,30 @@ class CheckCorrectEventController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkEvent.text = "This is the event you've chosen \(TodoManager.sharedInstance.path)"
-        eventId.titleLabel?.text =  (TodoManager.sharedInstance.path)
+        checkEvent.text = "Wait untill your event is loaded.."
+        eventId.setTitle("\(TodoManager.sharedInstance.path)", forState: .Normal)
+        eventId.hidden = true
+        delay(15){
+            self.checkEvent.hidden = true
+            self.eventId.hidden = false
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        Post.feed?.removeAll()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func delay(delay: Double, closure: ()->()){
+        dispatch_after(
+            dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(),
+            closure
+        )
     }
 }

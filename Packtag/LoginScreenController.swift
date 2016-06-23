@@ -113,11 +113,16 @@ class LoginScreenController: UIViewController {
                                     print("errorcode is \(errorcode)")
                                 }
                             }
-                            if let client = Dropbox.authorizedClient{
-                                client.sharing.mountFolder(sharedFolderId: folderId3)
+                            print("editor maken")
+                            packTagClient.sharing.updateFolderMember(sharedFolderId: folderId3, member: memberSelector, accessLevel: Sharing.AccessLevel.Editor)
+                            self.delay(3){
+                                if let client = Dropbox.authorizedClient{
+                                    client.sharing.mountFolder(sharedFolderId: folderId3)
+                                }
                             }
                             
                         }
+                        
                     }
                     
                     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -173,7 +178,7 @@ class LoginScreenController: UIViewController {
                 let exists = self.filenames?.contains(self.createId.text!)
                 print("this is filenames \(self.filenames!)")
                 print(exists!)
-                if exists! {
+                if (exists! || self.createId.text! == ""){
                     print("this already exists")
                     self.eventExisting.hidden = false
                     self.delay(3){
@@ -187,8 +192,23 @@ class LoginScreenController: UIViewController {
                         self.eventMade.hidden = true
                         self.makeNewEvent.hidden = false
                     }
-                    packTagClient.files.createFolder(path: "/\(self.createId.text!)")
-                    packTagClient.sharing.shareFolder(path: "/\(self.createId.text!)")
+                    let id = self.createId.text!
+                    packTagClient.files.createFolder(path: "/\(id)")
+                    packTagClient.sharing.shareFolder(path: "/\(id)")
+                    let photo = UIImage(named: "HeartFilledIcon")
+                    let imageData: NSData = UIImagePNGRepresentation(photo!)!
+                    self.delay(5){
+                        packTagClient.files.upload(path: "/\(id)/PackTag App`Welcome to PackTag`idvinden`likes`\(NSDate())`.jpg", body: imageData).response { response, error in
+                            if let metadata = response {
+                                print("*** Upload file ****")
+                                print("Uploaded file name: \(metadata.name)")
+                                print("Uploaded file revision: \(metadata.rev)")
+                            }
+                            if let errorfile = error {
+                                print(errorfile)
+                            }
+                        }
+                    }
                 }
             }
         }

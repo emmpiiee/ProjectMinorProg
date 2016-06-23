@@ -171,9 +171,10 @@ class FeedController: UITableViewController {
     }
     
     @IBAction func changeEventClicked(sender: AnyObject) {
-        let tabBarController = self.presentingViewController as? UITabBarController
-        self.dismissViewControllerAnimated(true, completion: nil)
         Post.feed?.removeAll()
+        let tabBarController = self.presentingViewController as? UITabBarController
+//        tabBarController!.selectedIndex = 0
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // every section needs only 1 row for only 1 post
@@ -195,8 +196,7 @@ class FeedController: UITableViewController {
     func reloadTable (){
         return
     }
-    
-    
+
     // make sure latest post is first
     func postIndex(cellIndex : Int) -> Int {
         return tableView.numberOfSections - cellIndex - 1
