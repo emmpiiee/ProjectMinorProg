@@ -11,7 +11,9 @@ import SwiftyDropbox
 
 class FeedController: UITableViewController {
     
+    // Set outlet for button to change Event.
     @IBOutlet weak var changeEvent: UIBarButtonItem!
+    // Make variables.
     var checker = true
     var cursor1 = String()
     var filenames: Array<String>? = []
@@ -19,39 +21,35 @@ class FeedController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewdidload")
+        // Make pull refresh
         refreshControl = UIRefreshControl()
         refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
-    // reload data if home is clicked
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        // If view will appear reload data and pull refresh.
         tableView.reloadData()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FeedController.reloadTable), name: "reloadTable", object: nil)
-        print("view will apaar")
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
+        // Get current user.
         if let client = Dropbox.authorizedClient {
-            print(client)
-            
             client.users.getCurrentAccount().response { response, error in
-                print("*** Get current account ***")
                 if let account = response {
-                    print("Hello \(account.name.givenName)!")
+                    // Set user id to current user Id
                     TodoManager.sharedInstance.userId = account.accountId
-                    // capitalize names
+                    // Capitalize names and set userName to current user name.
                     let name = String(account.name.givenName.characters.prefix(1)).uppercaseString + String(account.name.givenName.characters.dropFirst())
                     let surname = String(account.name.surname.characters.prefix(1)).uppercaseString + String(account.name.surname.characters.dropFirst())
                     TodoManager.sharedInstance.userName = "\(name) \(surname)"
-                    print(TodoManager.sharedInstance.userName)
                 } else {
                     print(error!)
                 }
             }
             // List folder
+            // Execute 1 time
             if checker {
                 checker = false
                 updateList(client, path: TodoManager.sharedInstance.path)
@@ -59,31 +57,22 @@ class FeedController: UITableViewController {
             else if (cursor1 == ""){
                 updateList(client, path: TodoManager.sharedInstance.path)
             }
-                // if for statement 1 time executed
             else {
-                print("fase 1")
-                print("this is cursor 1 \(self.cursor1)")
-                print(TodoManager.sharedInstance.path)
                 updateList(client, cursor: self.cursor1)
             }
         } else {
             print("error")
         }
-        print("end of viewwillappear")
     }
     
+    // Function get list to get list for the first time
     func updateList (client: DropboxClient, path: String) {
         client.files.listFolder(path: "\(TodoManager.sharedInstance.path)").response { response, error in
-            print("/Event1")
-            print("printen van todo path hhier \(TodoManager.sharedInstance.path)")
-            print("*** List folder ***")
-            print("-----------------------------------\(response?.cursor)")
             if let result = response {
-                print("Folder contents:")
+                // Get all folder names and store in filenames.
                 for entry in result.entries {
                     print(entry.name)
                     self.filenames?.append(entry.name)
-                    print("dit is de array filenames \(self.filenames)")
                     // download a file
                     let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
                         let fileManager = NSFileManager.defaultManager()
@@ -93,18 +82,16 @@ class FeedController: UITableViewController {
                         let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
                         return directoryURL.URLByAppendingPathComponent(pathComponent)
                     }
+                    // Download files from filenames.
                     client.files.download(path: "\(TodoManager.sharedInstance.path)/\(entry.name)", destination: destination).response { response, error in
                         if let (metadata, url) = response {
-                            print("*** Download file ***")
                             let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
                             if (subString.count == 6){
                                 print(subString.count)
                                 let data = NSData(contentsOfURL: url)
                                 let picture = UIImage (data: data!)
-                                print("Downloaded file name: \(metadata.name)")
-                                print("Downloaded file url: \(url)")
                                 self.fileImages?.append(picture!)
-                                // get caption and creator out name
+                                // Get creator and caption and make new post.
                                 let creator = subString[0]
                                 let caption = subString[1]
                                 let id = subString[2]
@@ -116,6 +103,7 @@ class FeedController: UITableViewController {
                         }
                         self.reloadTable()
                     }
+                    // Set cursor to cursor1.
                     self.cursor1 = result.cursor
                 }
             } else {
@@ -124,15 +112,13 @@ class FeedController: UITableViewController {
         }
     }
     
+    // Function updatelist to get the updates of the current list.
     func updateList (client: DropboxClient, cursor: String) {
         client.files.listFolderContinue(cursor: cursor).response { response, error in
-            print("*** List folder ***")
             if let result = response {
-                print("Folder contents:")
                 for entry in result.entries {
-                    print("this is entru name \(entry.name)")
+                    // Get all folder names and store in filenames.
                     self.filenames?.append(entry.name)
-                    print("dit is de array filenames \(self.filenames)")
                     // download a file
                     let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
                         let fileManager = NSFileManager.defaultManager()
@@ -142,22 +128,18 @@ class FeedController: UITableViewController {
                         let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
                         return directoryURL.URLByAppendingPathComponent(pathComponent)
                     }
+                    // Download files from filenames.
                     client.files.download(path: "\(TodoManager.sharedInstance.path)/\(entry.name)", destination: destination).response { response, error in
                         if let (metadata, url) = response {
-                            print("*** Download file ***")
                             let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
                             if (subString.count == 6) {
                                 let data = NSData(contentsOfURL: url)
                                 let picture = UIImage (data: data!)
-                                print("Downloaded file name: \(metadata.name)")
-                                print("Downloaded file url: \(url)")
                                 self.fileImages?.append(picture!)
-                                // get caption and creator out name
-                                
+                                // Get creator and caption and make new post.
                                 let creator = subString[0]
                                 let caption = subString[1]
                                 let id = subString[2]
-                                //                                        TodoManager.sharedInstance.userId = subString[2]
                                 let newPost = Post.init(creator: "\(creator)", image: picture!, caption: "\(caption)", id: "\(id)")
                                 Post.feed!.append(newPost)
                             }
@@ -165,6 +147,7 @@ class FeedController: UITableViewController {
                             print(error!)
                         }
                     }
+                    // Set cursor to cursor1
                     self.cursor1 = result.cursor
                 }
             } else {
@@ -173,10 +156,10 @@ class FeedController: UITableViewController {
         }
     }
     
+    // Return to view before tapBar.
     @IBAction func changeEventClicked(sender: AnyObject) {
         Post.feed?.removeAll()
-        let tabBarController = self.presentingViewController as? UITabBarController
-//        tabBarController!.selectedIndex = 0
+        _ = self.presentingViewController as? UITabBarController
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -253,6 +236,7 @@ class FeedController: UITableViewController {
         return 208
     }
     
+    // Get indexpath of tableview
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let indexPath = self.tableView.indexPathForSelectedRow
         indexPath?.row
@@ -264,6 +248,7 @@ class FeedController: UITableViewController {
         }
     }
     
+    // Refresh table view
     func refresh(sender:AnyObject) {
         viewWillAppear(true)
     }
