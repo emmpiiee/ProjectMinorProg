@@ -46,5 +46,14 @@ kan nu per ingelogde user in verschillende mappen foto;s laten zien en uploaden.
 Nu verschillende evenementen proberen te implementeren maar structuur is lastig . gevraagd aan de hour of code en overwegingen user te hardcoden biedt een oplossing. 
 Loop tegen groot probleem aan. 2 users moeten worden ingelogd want ik wil via het packtag account met de user een gedeelde map maken zodat er ook direct een dropbox map op je computer staat zodat je geen foto's van het gehele event nog moet navragen aan iedereen. er moet dus 1 user (de pactagapp user) worden gehardcoded in het programma. De addMember van Dropbox is depreciated en ze geven geen alternatief dus het linken van de 2 users lukt niet. durf niet te committen want bang dat ik werkende code verlies. 
 
-## DAg 3.5 
+## Dag 3.5 
 eerst functionaliteit regelen --> bugs komt later. 
+
+## Dag 4.1
+Eerst verder gegaan met rest van de app. profile users aangemaakt als goed wordt opgeslagen laadt nu de juiste profielfoto, echter nog niet direct als je hem hebt veranderd. zit ook lange vertraging in weet niet hoe ik dat sneller kan maken. nog gezeur gehad met als je je eigen profiel aan tikt mag je wel je photo edditten en als je ander mans profiel foto aanklikt mag dat niet. verder als er dus al een bestand met die naam bestaaan verwijder je eerst de ouder profielfoto en vervolgens de nieuwe.
+
+## Dag 4.2
+gewerkt aan dat mensen hun naam kunnen aantikken en dat ze dan in de goede profielfoto komne. lukte niet om de indextabel nummer te krijgen dus manier eromheen gewerkt. er staat nu een onzichtbare label naast de naam van de user met het profielid. deze kan hij namelijk als de naam van de user wordt aangetikt wel ophalen zodoende hebben we de profielid en kunnen er in het systeem mensen met dezelfde naam bestaan. 
+
+## Dag 4.3
+geprobeerd op te lossen dat de 2 users naast elkaar bestaan. Dit is uiteindelijk gelukt. ik krijg nu een user in het bestand en er wordt meteen een shared folder aangemaakt. deze moest je eerst in je mail accepteren en dan pas zou het werken, nu ook ingeprogrameerd dat er meteen wordt geaccepteerd dat je dit bestand in je dropbox wilt. dus er wordt nu met inloggen meteen gelinkt aan je folder en deze folder wordt direct in je dropbox gezet. er wordt gecheckt of het eventid bestaat en er wordt gecheckt of bij het aanmaken van een event het eventid niet al bestaat.
