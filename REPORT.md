@@ -12,4 +12,8 @@ if a user first uses the app, it will create an eventId. Long eventIds won't be 
 
 Secondly the user is asked to fil in an eventId that is received. While someone fills in an event and presses log in with dropbox the  program will tell if the eventid is in the list of files of the packtagapp. if not it warns the user. if it is in the files it will make a folder in the user it's own dropbox. this may take a while, so a dealy is build in.
 
-Further the user will be led to the feed.
+Further the user will be led to the feed. it may take a while untill all feeds will be downloaded, but the app can already be used while  it will be busy downloading. it will download a list of images in the current eventId and if the character ' is 5 times in the name, it will make the picture a part of the wall. The string before the first ' will correspond to the user uploader it's name, the string after that to the caption and the string after that to the uploaders userId
+
+If the users clicks on the photoICon, a user has the choice to select a photo or make a photo. Both options have a photoPicker  which makes sure the user is able to choose a photo from his library or make a photo directly in the app, and return to the photoController . if a picture is chosen a button appears to go to the caption controller.
+
+In the caption controller a user can edit a caption to his photo, consisting of mostly 35 characters. any string which is longer will be cut off.
