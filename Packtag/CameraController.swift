@@ -10,11 +10,11 @@ import UIKit
 import UIKit
 
 class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // Create outlets and variable.
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var sourceLabel: UILabel!
-    var selectedImage: UIImage?
-    
     @IBOutlet weak var showCaptionController: UIButton!
+    var selectedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,7 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        // If no image selected no option to go futher.
         if (selectedImage == nil){
             showCaptionController.hidden = true
         }
@@ -33,17 +34,20 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
         }
     }
     
+    // Function to clear image.
     func clearImage () {
         print("clearImage entered")
         selectedImageView.image = nil
     }
     
+    // Controller to pick item from library or make photo.
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage
         self.selectedImageView.image = selectedImage
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // Show screen and take photo if button is clicked.
     @IBAction func takePhoto(sender: UIButton!){
         let picker = UIImagePickerController()
         picker.allowsEditing = true
@@ -51,6 +55,8 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
         picker.delegate = self
         self.presentViewController(picker, animated: true, completion: nil)
     }
+    
+    // Show screen and pick photo if button is clicked.
     @IBAction func selectPhoto(sender: UIButton!){
         let picker = UIImagePickerController()
         picker.allowsEditing = true
@@ -59,11 +65,7 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
-    @IBAction func stopCamera(sender: UIButton!){
-        print("vanaf hier ")
-        NSNotificationCenter.defaultCenter().postNotificationName("reloadTable", object: nil)
-    }
-    
+    // Give captionController the picked photo.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "selectPhoto"){
             let destinationVC = segue.destinationViewController as! CaptionController
