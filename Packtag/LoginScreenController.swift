@@ -64,9 +64,6 @@ class LoginScreenController: UIViewController {
         // If no dropbox user is authorized, log in pop-up.
         if (Dropbox.authorizedClient == nil) {
             Dropbox.authorizeFromController(self)
-        } else {
-            print("User is already authorized!")
-            print(Dropbox.authorizedClient!)
         }
 
         // List folder contents.
@@ -94,7 +91,6 @@ class LoginScreenController: UIViewController {
                             let folderId3 = self.getFolderId(folderIdString)
                             // Get array of members that needs to be added to the folder.
                             let memberSelector = Sharing.MemberSelector.Email("emmaimmink@hotmail.com")
-                            print("member selector\(memberSelector)")
                             let addMember = Sharing.AddMember(member: memberSelector)
                             var arrayAddMember = Array<Sharing.AddMember>()
                             arrayAddMember.append(addMember)

@@ -36,7 +36,6 @@ class CameraController:UIViewController, UIImagePickerControllerDelegate, UINavi
     
     // Function to clear image.
     func clearImage () {
-        print("clearImage entered")
         selectedImageView.image = nil
     }
     

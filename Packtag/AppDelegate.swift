@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Post.feed = [Post]()
         Post.feed?.append(Post(creator: "PackTag", image: UIImage(named: "HeartFilledIcon"), caption: "Welcome to PackTag", id: "?"))
         // Override point for customization after application launch.
-        print("klaar")
         Dropbox.setupWithAppKey("wws46zauqc6bhyt")
         return true
     }

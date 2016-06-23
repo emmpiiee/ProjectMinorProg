@@ -53,7 +53,6 @@ class EditProfileController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func chooseProfile(sender: UIButton!){
         // Don't continue if selected image is nil.
         if (selectedImage == nil){
-            print("no selectedImage")
         }
         else {
             if(TodoManager.sharedInstance.arrayProfilePhotoNames.contains("\(TodoManager.sharedInstance.userId)`.jpg")){

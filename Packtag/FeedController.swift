@@ -71,7 +71,6 @@ class FeedController: UITableViewController {
             if let result = response {
                 // Get all folder names and store in filenames.
                 for entry in result.entries {
-                    print(entry.name)
                     self.filenames?.append(entry.name)
                     // download a file
                     let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
@@ -87,7 +86,6 @@ class FeedController: UITableViewController {
                         if let (metadata, url) = response {
                             let subString = self.getStringsBeforeCharacter(metadata.name, character: "`")
                             if (subString.count == 6){
-                                print(subString.count)
                                 let data = NSData(contentsOfURL: url)
                                 let picture = UIImage (data: data!)
                                 self.fileImages?.append(picture!)
@@ -244,7 +242,6 @@ class FeedController: UITableViewController {
         
         // Unwrap that optional
         if let label = cell?.textLabel?.text {
-            print("Tapped \(label)")
         }
     }
     

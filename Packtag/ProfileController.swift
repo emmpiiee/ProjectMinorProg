@@ -14,7 +14,6 @@ class ProfileController: UIViewController {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var editProfile: UIButton!
     @IBAction func editProfile(sender: AnyObject){
-        print("users want to edit profile")
     }
     var profileUsername = Profile.currentUser?.username
     var userProfile: Profile?
@@ -26,7 +25,6 @@ class ProfileController: UIViewController {
         super.viewDidLoad()
         // Show edit if current user same as profileUser.
         if (TodoManager.sharedInstance.userId == TodoManager.sharedInstance.profileViewId || TodoManager.sharedInstance.profileViewId == ""){
-            print("hallo")
         }
             // Don't show edit if current user and profile user are different.
         else {
