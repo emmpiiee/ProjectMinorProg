@@ -11,6 +11,7 @@ import SwiftyDropbox
 
 class LoginScreenController: UIViewController {
     
+    // Creating outlets for labels and buttons.
     @IBOutlet weak var nameUser: UITextField!
     @IBOutlet weak var eventId: UITextField!
     @IBOutlet weak var createId: UITextField!
@@ -22,19 +23,18 @@ class LoginScreenController: UIViewController {
     @IBOutlet weak var tooLongId: UILabel!
     @IBOutlet weak var noSpacesAllowed: UILabel!
     
+    // Create an array for filenames to be stored in.
     var filenames: Array<String>? = []
     
+    // Things to do when view did load.
     override func viewDidLoad() {
         super.viewDidLoad()
-        eventNotExisting.hidden = true
-        eventExisting.hidden = true
-        eventMade.hidden = true
-        noSpacesAllowed.hidden = true
-        tooLongId.hidden = true
+        labelsToInvisible()
+        
+        // Put lower label to name of autorizedClient.
         if let client = Dropbox.authorizedClient{
             client.users.getCurrentAccount().response { response, error in
                 if let account = response {
-                    print("\(account.name)")
                     self.changeAccount.titleLabel?.text = "Not \(account.name.givenName)?"
                 }
             }
@@ -44,16 +44,14 @@ class LoginScreenController: UIViewController {
         }
     }
     
+    
     @IBAction func linkButtonPressed(sender: AnyObject) {
-        
-        //        var folderId = Files.SearchMatch.self
-        var accountId = String()
-        //        var folderIdString = String?()
-        
+        // Hardcode packTag account.
         let accesToken = "9jdMHYq2mWAAAAAAAAAAImt9zBjH-LVWlaMy0U8tk8RDSCLk5kdxTDpRXZzKUb9a"
         let uid = "PackTag"
         let packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
         
+        // Make path voor eventId the user choose.
         if (eventId.text! == ""){
             TodoManager.sharedInstance.path = ""
         }
@@ -61,6 +59,7 @@ class LoginScreenController: UIViewController {
             TodoManager.sharedInstance.path = "/\(eventId.text!)"
         }
         
+        // If no dropbox user is authorized, log in pop-up.
         if (Dropbox.authorizedClient == nil) {
             Dropbox.authorizeFromController(self)
         } else {
@@ -68,15 +67,11 @@ class LoginScreenController: UIViewController {
             print(Dropbox.authorizedClient!)
         }
         
-        // List folder
+        // List folder contents.
         packTagClient.files.listFolder(path: "").response { response, error in
-            print("*** List folder packtag ***")
             if let result = response {
-                print("Folder contents:")
                 for entry in result.entries {
-                    print(entry.name)
                     self.filenames?.append(entry.name)
-                    print("dit is de array filenames \(self.filenames)")
                     // download a file
                     let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
                         let fileManager = NSFileManager.defaultManager()
@@ -87,38 +82,26 @@ class LoginScreenController: UIViewController {
                         return directoryURL.URLByAppendingPathComponent(pathComponent)
                     }
                 }
+                // Check if eventID exists.
                 let exists = self.filenames?.contains(self.eventId.text!)
                 if exists! {
-                    print("wordt dit uitgevoerd")
                     packTagClient.files.search(path: "", query: "\(self.eventId.text!)").response { response, error in
                         if let result = response {
+                            // Get correct folderId (dropbox function deprecated).
                             let folderIdString = result.matches[0].description
-                            print("folder id string\(folderIdString)")
-                            
-                            let subString = folderIdString.componentsSeparatedByString("shared_folder_id")
-                            print(subString)
-                            let folderId = subString[1].componentsSeparatedByString("=")
-                            print("folderId is nu \(folderId)")
-                            let folderId1 = folderId[1].componentsSeparatedByString(";")
-                            print("folderid1 \(folderId1[0])einde")
-                            let folderId2 = folderId1[0]
-                            print("folderId2 = ....\(folderId2)....")
-                            let folderId3 = folderId2.substringFromIndex(folderId2.startIndex.successor())
-                            print("folderId3 = ....\(folderId3)....")
-                            
+                            let folderId3 = self.getFolderId(folderIdString)
+                            // Get array of members that needs to be added to the folder.
                             let memberSelector = Sharing.MemberSelector.Email("emmaimmink@hotmail.com")
                             print("member selector\(memberSelector)")
                             let addMember = Sharing.AddMember(member: memberSelector)
                             var arrayAddMember = Array<Sharing.AddMember>()
                             arrayAddMember.append(addMember)
-                            
+                            // Add client to the folder.
                             packTagClient.sharing.addFolderMember(sharedFolderId: folderId3, members: arrayAddMember, quiet: true, customMessage: "Hallo, dit is een automatisch gegenereerd bericht.").response { response, error in
-                                if let errorcode = error {
-                                    print("errorcode is \(errorcode)")
-                                }
                             }
-                            print("editor maken")
+                            // Make client editor of the file.
                             packTagClient.sharing.updateFolderMember(sharedFolderId: folderId3, member: memberSelector, accessLevel: Sharing.AccessLevel.Editor)
+                            // With a 3 seconds delay mount client to the folder.
                             self.delay(3){
                                 if let client = Dropbox.authorizedClient{
                                     client.sharing.mountFolder(sharedFolderId: folderId3)
@@ -129,13 +112,12 @@ class LoginScreenController: UIViewController {
                         
                     }
                     
+                    // Go to CheckCorrectEventController
                     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let resultViewController = storyboard.instantiateViewControllerWithIdentifier("ChooseEvent")
                     self.presentViewController(resultViewController, animated: true, completion: nil)
-                    
-                    //                    let secondViewController = self.storyboard!.instantiateViewControllerWithIdentifier("FeedController") as! FeedController
-                    //                    self.navigationController!.pushViewController(secondViewController, animated: true)
                 }
+                    // If eventId not in filenames show label.
                 else {
                     self.eventNotExisting.hidden = false
                     self.delay(3){
@@ -147,6 +129,7 @@ class LoginScreenController: UIViewController {
         }
     }
     
+    // Function that gives a delay before executing code inside.
     func delay(delay: Double, closure: ()->()){
         dispatch_after(
             dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))
@@ -156,19 +139,18 @@ class LoginScreenController: UIViewController {
         )
     }
     
+    // If user want to make a new event.
     @IBAction func makeNewEvent(sender: AnyObject) {
         filenames?.removeAll()
+        // HardCode packTagClient.
         let accesToken = "9jdMHYq2mWAAAAAAAAAAImt9zBjH-LVWlaMy0U8tk8RDSCLk5kdxTDpRXZzKUb9a"
         let uid = "PackTag"
         let packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
+        // List foldernames.
         packTagClient.files.listFolder(path: "").response { response, error in
-            print("*** List folder packtag ***")
             if let result = response {
-                print("Folder contents:")
                 for entry in result.entries {
-                    print(entry.name)
                     self.filenames?.append(entry.name)
-                    print("dit is de array filenames \(self.filenames)")
                     // download a file
                     let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
                         let fileManager = NSFileManager.defaultManager()
@@ -179,47 +161,47 @@ class LoginScreenController: UIViewController {
                         return directoryURL.URLByAppendingPathComponent(pathComponent)
                     }
                 }
+                // Check if eventId already exists
                 let exists = self.filenames?.contains(self.createId.text!)
-                print("this is filenames \(self.filenames!)")
-                print(exists!)
                 if (exists! || self.createId.text! == "" ){
-                    print("this already exists")
+                    // Show label.
                     self.eventExisting.hidden = false
                     self.delay(3){
                         self.eventExisting.hidden = true
                     }
                 }
+                    // If eventId longer then 30 characters, show label.
                 else if (self.createId.text!.characters.count >= 30) {
                     self.tooLongId.hidden = false
                     self.delay(3){
                         self.tooLongId.hidden = true
                     }
                 }
+                    // if evenId contains spaces show label.
                 else if (self.createId.text!.rangeOfString(" ") != nil){
                     self.noSpacesAllowed.hidden = false
                     self.delay(3){
                         self.noSpacesAllowed.hidden = true
                     }
                 }
+                    // If correct eventId make new folder, show label.
                 else{
+                    // Show label and hide button for 6 seconds.
                     self.eventMade.hidden = false
                     self.makeNewEvent.hidden = true
                     self.delay(6){
                         self.eventMade.hidden = true
                         self.makeNewEvent.hidden = false
                     }
+                    // Make variable so user can't change during folder making.
                     let id = self.createId.text!
                     packTagClient.files.createFolder(path: "/\(id)")
                     packTagClient.sharing.shareFolder(path: "/\(id)")
+                    // Create a first post.
                     let photo = UIImage(named: "HeartFilledIcon")
                     let imageData: NSData = UIImagePNGRepresentation(photo!)!
                     self.delay(5){
                         packTagClient.files.upload(path: "/\(id)/PackTag App`Welcome to PackTag`idvinden`likes`\(NSDate())`.jpg", body: imageData).response { response, error in
-                            if let metadata = response {
-                                print("*** Upload file ****")
-                                print("Uploaded file name: \(metadata.name)")
-                                print("Uploaded file revision: \(metadata.rev)")
-                            }
                             if let errorfile = error {
                                 print(errorfile)
                             }
@@ -230,16 +212,37 @@ class LoginScreenController: UIViewController {
         }
     }
     
+    // Make a function if somewhere tapped not on keyboard.
     @IBAction func tap (sender: UITapGestureRecognizer!){
         eventId.resignFirstResponder()
         createId.resignFirstResponder()
     }
     
+    // Set up dropbox popup if user clicks on button.
     @IBAction func changeUserClicked(sender: AnyObject) {
         Dropbox.unlinkClient()
         Dropbox.authorizeFromController(self)
     }
     
+    // Set some labels to invisible.
+    func labelsToInvisible(){
+        eventNotExisting.hidden = true
+        eventExisting.hidden = true
+        eventMade.hidden = true
+        noSpacesAllowed.hidden = true
+        tooLongId.hidden = true
+    }
+    
+    // Get folderId (Drobox function deprecated).
+    func getFolderId(result: String) -> String {
+        let subString = result.componentsSeparatedByString("shared_folder_id")
+        let folderId = subString[1].componentsSeparatedByString("=")
+        let folderId1 = folderId[1].componentsSeparatedByString(";")
+        let folderId2 = folderId1[0]
+        let folderId3 = folderId2.substringFromIndex(folderId2.startIndex.successor())
+        
+        return folderId3
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
