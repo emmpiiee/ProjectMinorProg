@@ -17,10 +17,6 @@ class CaptionController: UIViewController {
     
     @IBAction func submitPressed (sender: UIButton){
 
-        //
-//    func textViewDidChange(captionText: UITextView){
-//            placeholderLabel.hidden = !captionText.text.isEmpty
-//    }
                     let imageData: NSData = UIImagePNGRepresentation(selectedImage!)!
                     UIImage(data:imageData,scale:1.0)
         
@@ -53,14 +49,6 @@ class CaptionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePreview.image = selectedImage
-//        captionText.delegate = self
-//        placeholderLabel = UILabel()
-//        placeholderLabel.text = "Enter optional text here..."
-//        placeholderLabel.font = UIFont.italicSystemFontOfSize(captionText.font!.pointSize)
-//        placeholderLabel.sizeToFit()
-//        captionText.addSubview(placeholderLabel)
-//        placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
-//        placeholderLabel.hidden = !captionText.text.isEmpty
     }
     
     

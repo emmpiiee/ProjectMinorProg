@@ -15,12 +15,14 @@ class LoginScreenController: UIViewController {
     @IBOutlet weak var eventId: UITextField!
     @IBOutlet weak var createId: UITextField!
     @IBOutlet weak var eventNotExisting: UILabel!
+    @IBOutlet weak var eventExisting: UILabel!
     
     var filenames: Array<String>? = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         eventNotExisting.hidden = true
+        eventExisting.hidden = true
     }
     
     @IBAction func linkButtonPressed(sender: AnyObject) {
@@ -123,22 +125,34 @@ class LoginScreenController: UIViewController {
     }
 
     @IBAction func makeNewEvent(sender: AnyObject) {
-        print("user needs to create a folder")
-        let accesToken = "9jdMHYq2mWAAAAAAAAAAImt9zBjH-LVWlaMy0U8tk8RDSCLk5kdxTDpRXZzKUb9a"
-        let uid = "PackTag"
-        let packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
-        packTagClient.users.getCurrentAccount().response { response, error in
-            print("*** Get current account pagtag ***")
-            if let account = response {
-                print("Hello \(account.name.givenName)!")
-            } else {
-                print(error!)
+        let exists = self.filenames?.contains(self.eventId.text!)
+        if exists! {
+            eventExisting.hidden = false
+            self.delay(3){
+                self.eventExisting.hidden = true
             }
+
         }
-        packTagClient.files.createFolder(path: "/\(createId.text!)")
-        packTagClient.sharing.shareFolder(path: "/\(createId.text!)")
+        else{
+            let accesToken = "9jdMHYq2mWAAAAAAAAAAImt9zBjH-LVWlaMy0U8tk8RDSCLk5kdxTDpRXZzKUb9a"
+            let uid = "PackTag"
+            let packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
+            //        packTagClient.users.getCurrentAccount().response { response, error in
+            //            print("*** Get current account pagtag ***")
+            //            if let account = response {
+            //                print("Hello \(account.name.givenName)!")
+            //            } else {
+            //                print(error!)
+            //            }
+            //        }
+            packTagClient.files.createFolder(path: "/\(createId.text!)")
+            packTagClient.sharing.shareFolder(path: "/\(createId.text!)")
+        }
     }
     
+    @IBAction func tap (sender: UITapGestureRecognizer!){
+        eventId.resignFirstResponder()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

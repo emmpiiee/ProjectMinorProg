@@ -540,6 +540,12 @@
                                     <action selector="makeNewEvent:" destination="Z5a-9x-gDS" eventType="touchUpInside" id="fiO-SI-G2H"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This eventId already exists" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hY6-11-fER">
+                                <rect key="frame" x="20" y="394" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -571,12 +577,18 @@
                     </view>
                     <connections>
                         <outlet property="createId" destination="XbT-Lc-BgC" id="zxH-US-NVY"/>
+                        <outlet property="eventExisting" destination="hY6-11-fER" id="SaE-f2-nfn"/>
                         <outlet property="eventId" destination="YuQ-Ms-XSI" id="irV-ul-8vH"/>
                         <outlet property="eventNotExisting" destination="HaF-4U-10H" id="33t-aU-RxJ"/>
                         <outlet property="nameUser" destination="XbT-Lc-BgC" id="ATj-np-gw4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZEf-A1-3PO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Q5R-y0-Qab">
+                    <connections>
+                        <action selector="tap:" destination="Z5a-9x-gDS" id="8pD-5w-6fI"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1208" y="-1051"/>
         </scene>
