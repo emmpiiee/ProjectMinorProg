@@ -16,6 +16,9 @@ class LoginScreenController: UIViewController {
     @IBOutlet weak var createId: UITextField!
     @IBOutlet weak var eventNotExisting: UILabel!
     @IBOutlet weak var eventExisting: UILabel!
+    @IBOutlet weak var changeAccount: UIButton!
+    @IBOutlet weak var eventMade: UILabel!
+    @IBOutlet weak var makeNewEvent: UIButton!
     
     var filenames: Array<String>? = []
 
@@ -23,6 +26,18 @@ class LoginScreenController: UIViewController {
         super.viewDidLoad()
         eventNotExisting.hidden = true
         eventExisting.hidden = true
+        eventMade.hidden = true
+        if let client = Dropbox.authorizedClient{
+            client.users.getCurrentAccount().response { response, error in
+                if let account = response {
+                    print("\(account.name)")
+                    self.changeAccount.titleLabel?.text = "Not \(account.name.givenName)?"
+                }
+            }
+        }
+        else{
+            changeAccount.titleLabel?.text = "Log in"
+        }
     }
     
     @IBAction func linkButtonPressed(sender: AnyObject) {
@@ -40,6 +55,13 @@ class LoginScreenController: UIViewController {
         }
         else {
             TodoManager.sharedInstance.path = "/\(eventId.text!)"
+        }
+        
+        if (Dropbox.authorizedClient == nil) {
+            Dropbox.authorizeFromController(self)
+        } else {
+            print("User is already authorized!")
+            print(Dropbox.authorizedClient!)
         }
 
         // List folder
@@ -90,10 +112,11 @@ class LoginScreenController: UIViewController {
                                 if let errorcode = error {
                                     print("errorcode is \(errorcode)")
                                 }
-                                if let client = Dropbox.authorizedClient{
-                                    client.sharing.mountFolder(sharedFolderId: folderId3)
-                                }
                             }
+                            if let client = Dropbox.authorizedClient{
+                                client.sharing.mountFolder(sharedFolderId: folderId3)
+                            }
+                            
                         }
                     }
                     
@@ -125,34 +148,62 @@ class LoginScreenController: UIViewController {
     }
 
     @IBAction func makeNewEvent(sender: AnyObject) {
-        let exists = self.filenames?.contains(self.eventId.text!)
+        filenames?.removeAll()
+        let accesToken = "9jdMHYq2mWAAAAAAAAAAImt9zBjH-LVWlaMy0U8tk8RDSCLk5kdxTDpRXZzKUb9a"
+        let uid = "PackTag"
+        let packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
+        packTagClient.files.listFolder(path: "").response { response, error in
+            print("*** List folder packtag ***")
+            if let result = response {
+                print("Folder contents:")
+                for entry in result.entries {
+                    print(entry.name)
+                    self.filenames?.append(entry.name)
+                    print("dit is de array filenames \(self.filenames)")
+                    // download a file
+                    let destination : (NSURL, NSHTTPURLResponse) -> NSURL = { temporaryURL, response in
+                        let fileManager = NSFileManager.defaultManager()
+                        let directoryURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                        // generate a unique name for this file in case we've seen it before
+                        let UUID = NSUUID().UUIDString
+                        let pathComponent = "\(UUID)-\(response.suggestedFilename!)"
+                        return directoryURL.URLByAppendingPathComponent(pathComponent)
+                    }
+                }
+        let exists = self.filenames?.contains(self.createId.text!)
+        print("this is filenames \(self.filenames!)")
+        print(exists!)
         if exists! {
-            eventExisting.hidden = false
+            print("this already exists")
+            self.eventExisting.hidden = false
             self.delay(3){
                 self.eventExisting.hidden = true
             }
-
         }
         else{
-            let accesToken = "9jdMHYq2mWAAAAAAAAAAImt9zBjH-LVWlaMy0U8tk8RDSCLk5kdxTDpRXZzKUb9a"
-            let uid = "PackTag"
-            let packTagClient = DropboxClient.init(accessToken: DropboxAccessToken(accessToken: accesToken, uid: uid))
-            //        packTagClient.users.getCurrentAccount().response { response, error in
-            //            print("*** Get current account pagtag ***")
-            //            if let account = response {
-            //                print("Hello \(account.name.givenName)!")
-            //            } else {
-            //                print(error!)
-            //            }
-            //        }
-            packTagClient.files.createFolder(path: "/\(createId.text!)")
-            packTagClient.sharing.shareFolder(path: "/\(createId.text!)")
+                self.eventMade.hidden = false
+                self.makeNewEvent.hidden = true
+            self.delay(6){
+                self.eventMade.hidden = true
+                self.makeNewEvent.hidden = false
+            }
+                packTagClient.files.createFolder(path: "/\(self.createId.text!)")
+                packTagClient.sharing.shareFolder(path: "/\(self.createId.text!)")
+                }
+            }
         }
     }
     
     @IBAction func tap (sender: UITapGestureRecognizer!){
         eventId.resignFirstResponder()
+        createId.resignFirstResponder()
     }
+    
+    @IBAction func changeUserClicked(sender: AnyObject) {
+        Dropbox.unlinkClient()
+        Dropbox.authorizeFromController(self)
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
