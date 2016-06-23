@@ -16,4 +16,9 @@ Further the user will be led to the feed. it may take a while untill all feeds w
 
 If the users clicks on the photoICon, a user has the choice to select a photo or make a photo. Both options have a photoPicker  which makes sure the user is able to choose a photo from his library or make a photo directly in the app, and return to the photoController . if a picture is chosen a button appears to go to the caption controller.
 
-In the caption controller a user can edit a caption to his photo, consisting of mostly 35 characters. any string which is longer will be cut off.
+In the caption controller a user can edit a caption to his photo, consisting of mostly 35 characters. any string which is longer will be cut off. it will upload the photo with the same name building as we download the photo. 
+
+in the profile the controller searches for names with 2 ' inside. when it is found it will check if profile id corresponds to one, if so it will show it as profile picture if not it will remain empty. if the profile you'd like to see is your own profile you'll be able to edit your profile picture, if you do so a similiar view as in the cameracontroller will open, and you'll be able to change your profilePhoto.
+
+##
+
