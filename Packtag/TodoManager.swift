@@ -21,13 +21,13 @@ class TodoManager {
     var eventId : String = ""
     var userId = String()
     
-    //
+    // create variables for profile
     var profileViewId = String()
     var arrayProfileId : Array<String> = []
     var lastShowedProfileId = String()
     var arrayProfilePhotoNames : Array<String> = []
     
-    //hoi
+
 }
 
 

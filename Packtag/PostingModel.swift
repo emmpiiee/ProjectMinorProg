@@ -34,13 +34,12 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var imgView: UIImageView!
 }
 
+// Create outlets for postHeaderCell
 class PostHeaderCell: UITableViewCell {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var usernameButton: UIButton!
     @IBOutlet weak var userId: UILabel!
     @IBAction func showUsersProfile(sender: UIButton){
-        print("user id\(userId.text)")
-        print("user name \(usernameButton.currentTitle)")
         TodoManager.sharedInstance.profileViewId = userId.text!
     }
 }
