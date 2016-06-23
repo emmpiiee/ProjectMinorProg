@@ -18,8 +18,8 @@ class CaptionController: UIViewController {
     
     @IBAction func submitPressed (sender: UIButton){
         
-        if (captionText.text!.characters.count >= 21){
-            captionText.text! = captionText.text!.substringToIndex(captionText.text!.startIndex.advancedBy(20))
+        if (captionText.text!.characters.count >= 30){
+            captionText.text! = captionText.text!.substringToIndex(captionText.text!.startIndex.advancedBy(30))
         }
         
         let imageData: NSData = UIImagePNGRepresentation(selectedImage!)!
@@ -27,7 +27,7 @@ class CaptionController: UIViewController {
         if let client = Dropbox.authorizedClient {
             print("komt tie hierin dan")
             
-            client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userName)`\(captionText.text!)`\(TodoManager.sharedInstance.userId)`likes`version`.jpg", body: imageData).response { response, error in
+            client.files.upload(path: "\(TodoManager.sharedInstance.path)/\(TodoManager.sharedInstance.userName)`\(captionText.text!)`\(TodoManager.sharedInstance.userId)`likes`\(NSDate())`.jpg", body: imageData).response { response, error in
                 if let metadata = response {
                     print("*** Upload file ****")
                     print("Uploaded file name: \(metadata.name)")
